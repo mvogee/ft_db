@@ -15,7 +15,6 @@ typedef struct	s_headers
 typedef struct 	s_col
 {
 	t_col	*down;
-	t_col	*right;
 	char	*data;
 	char	*header;
 }				t_col;
@@ -31,7 +30,7 @@ typedef enum e_errors
 {
 	INVALID_COMMAND,
 	CREATE_TABLE_USAGE,
-	
+
 };
 
 #endif

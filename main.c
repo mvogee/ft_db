@@ -26,12 +26,14 @@ void	create_table(int argc, char **argv)
 
 	if (argc > 3)
 	{
-		print_usage(CREATE_TABLE_USAGE)
+		print_usage(CREATE_TABLE_USAGE);
 		return ;
 	}
 	filename = argv[3];
-	check_for_existing_tables()
-
+	tabels = check_for_existing_tables(filename);
+	check_duplicate(filename, tables); // make sure the table doesn't already exist
+	//create the new file with the name filename.db
+	// add the filepath to the tables list
 }
 
 void	dispatch_input(int argc, char **argv)
@@ -57,7 +59,6 @@ void	dispatch_input(int argc, char **argv)
 int		main(int argc, char **argv)
 {
 	t_tables	*tables;
-	t_headers	*headers;
 	// get user input from ac av.
 	// depending on what they give us is what we will do with what they give us
 	// create_table [table name]
@@ -67,6 +68,7 @@ int		main(int argc, char **argv)
 	// delete_category [table][category]
 	// mod_ellement [table][element][category][new_data]
 	// retrieve (table)(element)(category)
+	tables = retrieve_tables();
 	if (argc > 1)
 	{
 		dispatch_input(argc, argv);
