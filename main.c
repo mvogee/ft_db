@@ -8,8 +8,16 @@
 ** THE COLUMN HEADERS CAN THEN BE SEARCHED FOR THE CORRECT HEADER NUMBER AND THE SPECIFIC DATA GOTTEN FROM THE LIST
 **
 ** THE DOWN SIDE TO THIS IS THAT ADDING A NEW HEADER WOULD MEAN GOING THROUGH EVERY ENTRY AND ADDING THAT LINK TO THE LIST
+** BUT THE WAY I AM DOING IT NOW WITH THE RIGHT LINK IN THE COLUMNS WOULD HAVE TO DO THAT ANYWAY.
 */
-
+void	print_usage(int reason)
+{
+	printf("useage: ./bogeedb command.\n")
+	if (reason == INVALID_COMMAND)
+		printf("valid commands: create_table\n add_category\n add_ellement\n delete_ellement\n delete_category\n delete_table\n mod_ellement\n retrieve\n");
+	else if (reason == CREATE_TABLE_USAGE)
+		printf("create_table [table_name]\n");
+}
 
 void	create_table(int argc, char **argv)
 {
@@ -31,13 +39,13 @@ void	dispatch_input(int argc, char **argv)
 	if (!strcmp(argv[1], "create-table"))
 		create_table(argc, argv); // make this
 	else if (!strcmp(argv[1], "add-category"))
-		add_category(argc, argv); // make this
+		add_category(argc, argv); // make this. add_col
 	else if (!strcmp(argv[1], "add-ellement"))
-		add_ellement(argc, argv); // make this
+		add_ellement(argc, argv); // make this. add_row. maybe rename the functions
 	else if (!strcmp(argv[1], "delete-ellement"))
-		delete_ellement(argc, argv); // make this
+		delete_ellement(argc, argv); // make this. delete_row
 	else if (!strcmp(argv[1], "delete-category"))
-		delete_category(argc, argv); // make this
+		delete_category(argc, argv); // make this. delete_col
 	else if (!strcmp(argv[1], "mod-ellement"))
 		mod_ellement(argc, argv); // make this
 	else if (!strcmp(argv[1], "retrieve"))
@@ -65,8 +73,6 @@ int		main(int argc, char **argv)
 	}
 	else
 	{
-		printf("useage: ./bogeedb command.\n")
-		printf("commands: create_table, add_category, add_ellement, delete_ellement, delete_category, delete_table, mod_ellement, retrieve\n"); // move all this stuff to another funciton for ussage and help
 	}
 	return (0);
 }

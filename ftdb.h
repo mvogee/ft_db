@@ -27,4 +27,11 @@ typedef struct	s_tables
 	t_tables	*next;
 }				t_tables;
 
+typedef enum e_errors
+{
+	INVALID_COMMAND,
+	CREATE_TABLE_USAGE,
+	
+};
+
 #endif
