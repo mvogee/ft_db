@@ -22,7 +22,7 @@ typedef struct 	s_col
 
 typedef struct	s_tables
 {
-	char		*table;
+	char		*path;
 	char		*filname;
 	t_tables	*next;
 }				t_tables;
