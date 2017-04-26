@@ -10,6 +10,8 @@
 ** THE DOWN SIDE TO THIS IS THAT ADDING A NEW HEADER WOULD MEAN GOING THROUGH EVERY ENTRY AND ADDING THAT LINK TO THE LIST
 ** BUT THE WAY I AM DOING IT NOW WITH THE RIGHT LINK IN THE COLUMNS WOULD HAVE TO DO THAT ANYWAY.
 */
+
+// I NEED A FILE THAT I KNOW THE NAME OF TO STORE THE LIST OF TABLES IN SO THAT I CAN RETRIEVE IT ON RUNNING
 void	print_usage(int reason)
 {
 	printf("useage: ./bogeedb command.\n")
@@ -19,8 +21,29 @@ void	print_usage(int reason)
 		printf("create_table [table_name]\n");
 }
 
+int		open_new_record(char *filename)
+{
+	int			fd;
+
+	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0664);
+	if (fd == -1)
+		perror("an error occured opening the file %s\n", filename);
+	else
+		printf("new table %s has been created\n", filename);
+	return (fd);
+}
+
+// t_tables	retrieve_tables(void)
+// {
+// 	t_tables	*tables;
+// 	int			fd;
+//
+// 	fd = open("bogeedb_tables.db", O_CREAT | ORDWR | O_APPEND, 0664);
+// }
+
 void	create_table(int argc, char **argv)
 {
+	int			fd;
 	char		*filename;
 	t_tables	*tables;
 
@@ -29,11 +52,8 @@ void	create_table(int argc, char **argv)
 		print_usage(CREATE_TABLE_USAGE);
 		return ;
 	}
-	filename = argv[3];
-	tabels = check_for_existing_tables(filename);
-	check_duplicate(filename, tables); // make sure the table doesn't already exist
+	fd = open_new_record(filename);
 	//create the new file with the name filename.db
-	// add the filepath to the tables list
 }
 
 void	dispatch_input(int argc, char **argv)
@@ -58,7 +78,6 @@ void	dispatch_input(int argc, char **argv)
 
 int		main(int argc, char **argv)
 {
-	t_tables	*tables;
 	// get user input from ac av.
 	// depending on what they give us is what we will do with what they give us
 	// create_table [table name]
@@ -68,7 +87,6 @@ int		main(int argc, char **argv)
 	// delete_category [table][category]
 	// mod_ellement [table][element][category][new_data]
 	// retrieve (table)(element)(category)
-	tables = retrieve_tables();
 	if (argc > 1)
 	{
 		dispatch_input(argc, argv);

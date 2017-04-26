@@ -16,15 +16,7 @@ typedef struct 	s_col
 {
 	t_col	*down;
 	char	*data;
-	char	*header;
 }				t_col;
-
-typedef struct	s_tables
-{
-	char		*path;
-	char		*filname;
-	t_tables	*next;
-}				t_tables;
 
 typedef enum e_errors
 {
