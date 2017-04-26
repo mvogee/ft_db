@@ -2,16 +2,13 @@
 #include "ftdb.h"
 
 /*
-** WHY NOT INNITIALLY DO AN ARRAY OF LINKED LISTS WHERE THE ELLEMENTS ALL HAVE KEYS.
-** ALSO THIS WAY WE CAN GET THE CORRECT ELLEMENT IN O(1)
-** THE ELLEMENT WILL HOLD A LINKED LIST HEAD FOR THAT ELLEMENT THAT CONTAINS ALL THE HEADERS
-** THE COLUMN HEADERS CAN THEN BE SEARCHED FOR THE CORRECT HEADER NUMBER AND THE SPECIFIC DATA GOTTEN FROM THE LIST
+** REFACTOR
+** thinking of simply trying to write a table to a file and then reading it in every time as either a linked list or array
+** difficult part of doing this will be modifying information in the text file.
+** informaiton can be seperated by commas if there is an empty comma or ,, the information for that slot is NULL
 **
-** THE DOWN SIDE TO THIS IS THAT ADDING A NEW HEADER WOULD MEAN GOING THROUGH EVERY ENTRY AND ADDING THAT LINK TO THE LIST
-** BUT THE WAY I AM DOING IT NOW WITH THE RIGHT LINK IN THE COLUMNS WOULD HAVE TO DO THAT ANYWAY.
 */
 
-// I NEED A FILE THAT I KNOW THE NAME OF TO STORE THE LIST OF TABLES IN SO THAT I CAN RETRIEVE IT ON RUNNING
 void	print_usage(int reason)
 {
 	printf("useage: ./bogeedb command.\n")
@@ -30,6 +27,7 @@ int		open_new_record(char *filename)
 		perror("an error occured opening the file %s\n", filename);
 	else
 		printf("new table %s has been created\n", filename);
+	// add_table(filename); // add the filename to the file with a list of tables (bogee_meta)
 	return (fd);
 }
 
@@ -43,17 +41,12 @@ int		open_new_record(char *filename)
 
 void	create_table(int argc, char **argv)
 {
-	int			fd;
-	char		*filename;
-	t_tables	*tables;
-
 	if (argc > 3)
 	{
 		print_usage(CREATE_TABLE_USAGE);
 		return ;
 	}
-	fd = open_new_record(filename);
-	//create the new file with the name filename.db
+	open_new_record(argv[2]);
 }
 
 void	dispatch_input(int argc, char **argv)
@@ -88,11 +81,8 @@ int		main(int argc, char **argv)
 	// mod_ellement [table][element][category][new_data]
 	// retrieve (table)(element)(category)
 	if (argc > 1)
-	{
 		dispatch_input(argc, argv);
-	}
 	else
-	{
-	}
+		print_usage(INVALID_COMMAND);
 	return (0);
 }
