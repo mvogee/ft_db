@@ -5,6 +5,16 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
+# include <time.h>
+# include <stdlib.h>
+
+typedef struct 		s_entry
+{
+	time_t		entry_date;
+	char 		fname[32];
+	char		lname[32];
+	int			score;
+}					t_entry;
 
 // typedef struct	s_headers
 // {
@@ -24,7 +34,8 @@ enum e_errors
 {
 	INVALID_COMMAND,
 	CREATE_TABLE_USAGE,
-	ADD_CATEGORY
+	NEW_ENTRY
+	//ADD_CATEGORY
 };
 
 #endif
