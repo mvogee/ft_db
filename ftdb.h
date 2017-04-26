@@ -3,6 +3,8 @@
 
 # include <stdio.h>
 # include <unistd.h>
+# include <string.h>
+# include <fcntl.h>
 
 // typedef struct	s_headers
 // {
@@ -18,10 +20,11 @@
 // 	char	*data;
 // }				t_col;
 
-typedef enum e_errors
+enum e_errors
 {
 	INVALID_COMMAND,
-	CREATE_TABLE_USAGE
+	CREATE_TABLE_USAGE,
+	ADD_CATEGORY
 };
 
 #endif
