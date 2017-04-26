@@ -11,7 +11,7 @@
 # /* ************************************************************************** */
 
 
-FILENAMES	= main.c
+FILENAMES	= main_bhav.c
 
 ASAN		= -fsanitize=address
 NAME		= frac
