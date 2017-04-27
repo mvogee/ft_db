@@ -1,4 +1,4 @@
-#include "ftdb.h"
+#include "../includes/ftdb.h"
 
 int 	open_clean_database(char *filename)
 {
@@ -9,8 +9,8 @@ int 	open_clean_database(char *filename)
 		fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0664);
 	else
 	{
-		remove("bogeedb_backup.txt"); // will delete the old file "bogeedb.txt" at this point if the program is stopped all the data is lost
-		rename(filename, "bogeedb_backup.txt"); // this way we alwasy have a backup to fall back on if the program fails beyond this point
+		remove("bogeedb_backup"); // will delete the old file "bogeedb.txt" at this point if the program is stopped all the data is lost
+		rename(filename, "bogeedb_backup"); // this way we alwasy have a backup to fall back on if the program fails beyond this point
 		fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0664);
 	}
 	return (fd);
@@ -19,7 +19,7 @@ int 	open_clean_database(char *filename)
 char	*construct_line(t_header *header)
 {
 	t_header	*tmp_node;
-	char 		*line
+	char 		*line;
 
 	tmp_node = header;
 	line = NULL;
@@ -27,30 +27,28 @@ char	*construct_line(t_header *header)
 	{
 		if (line)
 		{
-			line = (char*)realloc(line, strlen(write_me) + strlen(tmp_node->information) + 1);
+			line = (char*)realloc(line, strlen(line) + strlen(tmp_node->information) + 1);
 			line = strcat(line, ",");
 			line = strcat(line, tmp_node->information);
 		}
 		else
 			line = strdup(tmp_node->information);
-		tmp_nodes = tmp_nodes->next;
+		tmp_node = tmp_node->next;
 	}
-	line = (char*)realloc(line, strlen(write_me) + 1);
+	line = (char*)realloc(line, strlen(line) + 1);
 	line = strcat(line, "\n");
 	return (line);
 }
 
 void	save_database(t_keys *database)
 {
-	// not tested
-	// should work in theory :p
 	t_keys		*tmp_keys;
 	char		*write_me;
 	int			fd;
 
 	tmp_keys = database;
 	write_me = NULL;
-	fd = open_clean_database("bogeedb.txt");
+	fd = open_clean_database("bogeedb");
 	if (fd < 0)
 	{
 		fprintf(stderr, "something went wrong opening the file");
@@ -69,3 +67,36 @@ void	save_database(t_keys *database)
 	if (fd >=0)
 		close(fd);
 }
+
+// t_header *init_row(void)
+// {
+// 	t_header *row;
+//
+// 	row = (t_header*)malloc(sizeof(t_header));
+// 	row->next = NULL;
+// 	row->information = strdup("information");
+// 	return (row);
+// }
+//
+// t_keys	*init_list(int k)
+// {
+// 	t_keys *key;
+//
+// 	key = (t_keys*)malloc(sizeof(t_keys));
+// 	key->next = NULL;
+// 	key->id = k;
+// 	key->header = init_row();
+// 	key->header->next = init_row();
+// 	key->header->next->next = init_row();
+// 	return (key);
+// }
+//
+// int main() {
+// 	t_keys *keys;
+//
+// 	keys = init_list(1);
+// 	keys->next = init_list(2);
+// 	keys->next->next = init_list(3);
+// 	save_database(keys);
+// 	return 0;
+// }

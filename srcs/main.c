@@ -7,7 +7,7 @@ void	print_usage(int reason)
 	printf("useage: ./bogeedb command\n");
 	if (reason == INVALID_COMMAND)
 	{
-		printf("valid commands:\ncreate_table\n");
+		printf("valid commands:\n");
 		// printf("add_category\n");
 		// printf("add_ellement\n");
 		// printf("delete_ellement\n");
