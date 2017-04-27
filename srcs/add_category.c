@@ -50,6 +50,29 @@ t_header	*create_headers(int argc, char **argv)
 	return (head);
 }
 
+void	add_links_to_rows(int new_cols, t_keys **keys)
+{
+	t_keys		*tmp_k;
+	t_header	*tmp_h;
+	int			count;
+
+	tmp_k = *keys;
+	count = 0;
+	while (tmp_k)
+	{
+		tmp_h = tmp_k->header;
+		while (tmp_h->next)
+			tmp_h = tmp_h->next;
+		while (count < new_cols)
+		{
+			tmp_h->next = init_node("\0");
+			tmp_h = tmp_h->next;
+			count++;
+		}
+		tmp_k = tmp_k->next;
+	}
+}
+
 t_keys		*add_category(int argc, char **argv, t_keys *database)
 {
 	// should work in theory.
@@ -74,5 +97,7 @@ t_keys		*add_category(int argc, char **argv, t_keys *database)
 		tmp_headers->next = init_node(argv[count]);
 		tmp_headers = tmp_headers->next;
 	}
+	if ((tmp_keys = tmp_keys->next))
+		add_links_to_rows(argc - 2, &tmp_keys); // adds empty nodes to all the rows so that the list stays square
 	return (database);
 }
