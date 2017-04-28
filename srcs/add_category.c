@@ -28,7 +28,7 @@ t_header	*init_node(char *information)
 
 	node = (t_header*)malloc(sizeof(t_header));
 	node->next = NULL;
-	node->information = information;
+	node->information = strdup(information);
 	return (node);
 }
 
@@ -43,7 +43,7 @@ t_header	*create_headers(int argc, char **argv)
 	tmp = head
 	while (count < argc)
 	{
-		tmp->next = init_node(argv[count]); // make this
+		tmp->next = init_node(argv[count]);
 		tmp = tmp->next;
 		count++;
 	}
