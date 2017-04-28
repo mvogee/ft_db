@@ -11,9 +11,9 @@
 # /* ************************************************************************** */
 
 
-FILENAMES	= main_bhav.c helper_funcs.c link_list_funcs.c
+FILENAMES	= main_bhav.c helper_funcs.c link_list_funcs.c query.c
 
-//ASAN		= -fsanitize=address
+ASAN		= -fsanitize=address
 NAME		= db
 CC			= gcc
 CFLAGS		+= -Wall -Werror -Wextra -Ofast

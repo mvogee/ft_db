@@ -22,10 +22,11 @@ void Pushtailheader(t_header **head, char *data)
 	else
 	{
 		while(current->next != NULL)
+		{
 			current = current->next;
+		}
 		Pushheader(&(current->next), data);
 	}
-
 }
 
 void Pushkey(t_keys **head, t_header *col_head)
@@ -47,9 +48,20 @@ void Pushtailkey(t_keys **head, t_header *col_head)
 	else
 	{
 		while(current->next != NULL)
+		{
 			current = current->next;
+		}
 		Pushkey(&(current->next), col_head);
 	}
+}
+
+void populate_headers(t_header **header, char **array, int width)
+{
+	int i;
+
+	i = -1;
+	while(++i < width)
+		Pushtailheader(header, array[i]);
 }
 
 t_header *initialize_columns(int size)

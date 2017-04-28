@@ -25,19 +25,6 @@ t_keys	*initialize_table(int fd)
 	return(table);
 }
 
-void populate_headers(t_header **header, char **array, int width)
-{
-	int i;
-
-	i = -1;
-	while(++i < width)
-	{
-		printf("iteration number %i, width: %i column: %s\n", i, width, array[i]);
-		Pushtailheader(header, array[i]);
-	}
-	printf("outside the loop");
-}
-
 
 //initialize a single key 
 //create a link list base off the width size
@@ -49,14 +36,15 @@ t_keys *read_table(int fd, int width)
 	t_keys *table;
 	t_header *header;
 	char **string_array;
+	int height;
 
 	x = 1;
 	table = NULL;
-	header = NULL;
+	//header = NULL;
+	height = 0;
 	fd = open_db("bvogeedb");
 	while((x = get_next_line(fd, &line)))
 	{
-		printf("GNL CALL %d\n", x);
 		if (x == -1)
 		{
 			perror("get next line error");
@@ -65,12 +53,14 @@ t_keys *read_table(int fd, int width)
 		if (x == 0)
 			break;
 		string_array = ft_strsplit(line, ' ');
+		header = NULL;
 		populate_headers(&header, string_array, width);
 		Pushtailkey(&table, header);
 		free(string_array);
+		height++;
 	}
-	// print out the list
-	// for (int i = 0; i < 2; ++i)
+	//print out the list
+	// for (int i = 0; i < height; ++i)
 	// {
 	// 	for (int i = 0; i < width; ++i)
 	// 	{
@@ -79,7 +69,8 @@ t_keys *read_table(int fd, int width)
 	// 	}
 	// 	table = table->next;
 	// }
-	// return (table);
+	close(fd);
+	return (table);
 }
 
 int	main(int argc, char **argv)
@@ -98,9 +89,12 @@ int	main(int argc, char **argv)
 		fd = open_db("bvogeedb");
 		table = initialize_table(fd);
 	}
-	if (argc > 2 && !strcmp(argv[1]), "query")
+	if (argc > 2 && !strcmp(argv[1], "query"))
 	{
-
+		fd = open_db("bvogeedb");
+		table = initialize_table(fd);
+		get_record(table, atoi(argv[2]));
+		free(table);
 	}
 	fd = 0;
 	close_record(fd);

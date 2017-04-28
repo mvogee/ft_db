@@ -50,9 +50,10 @@ void Pushtailkey(t_keys **head, t_header *col_head);
 t_header *initialize_columns(int size);
 void populate_headers(t_header **header, char **array, int width);
 
-
 //main function
 t_keys	*initialize_table(int fd);
-void populate_headers(t_header **header, char **array, int width);
 t_keys *read_table(int fd, int width);
+
+//query functions
+int	get_record(t_keys *table, int row_num);
 #endif
