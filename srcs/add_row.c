@@ -1,0 +1,77 @@
+#include "../includes/ftdb.h"
+
+// typedef struct s_header{
+// 	char *information;
+// 	struct s_header *next;
+// }				t_header;
+//
+// typedef struct s_keys{
+// 	int id;
+// 	t_header *header;
+// 	struct s_keys *next;
+// }				t_keys;
+
+int get_num_cols(t_header *header)
+{
+	t_header *tmp;
+	int count;
+
+	count = 0;
+	tmp = header;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		count++;
+	}
+	return (count);
+}
+
+t_header	*create_row_list(int argc, char **argv, int num_cols)
+{
+	int			count;
+	int 		i;
+	char		*information;
+	t_header	*head;
+	t_header	*tmp;
+
+	count = 1;
+	i = 4;
+	head = init_node(argv[3]);
+	tmp = head;
+	while (count < num_cols)
+	{
+		if (i < argc)
+			information = argv[i];
+		else
+			information = "\0";
+		tmp->next = init_node(information);
+		tmp = tmp->next;
+		count++;
+		i++;
+	}
+	return (head);
+}
+
+void	add_row(t_keys *database, int argc, char **argv)
+{
+	// needs testing but works in theory
+	int		cols;
+	char	*new_row;
+	t_keys	*tmp;
+
+	if (ac < 4)
+		print_usage(ADD_ROW);
+	if (!database || !database->header)
+	{
+		fprintf(stderr, "you have no headers! add some headers frist using add_category\n");
+		return ;
+	}
+	tmp = database;
+	new_row = argv[2]; // ./bogeedb add_row [rowname] [col-information]...
+	cols = get_num_cols(database->header);
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = init_key(tmp->id + 1);
+	tmp = tmp->next;
+	tmp->header = create_row_list(argc, argv, cols);
+}

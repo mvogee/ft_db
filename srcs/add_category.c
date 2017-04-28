@@ -1,17 +1,17 @@
 #include "../includes/ftdb.h"
 
-typedef struct s_header{
-	char *information;
-	struct s_header *next;
-}				t_header;
+// typedef struct s_header{
+// 	char *information;
+// 	struct s_header *next;
+// }				t_header;
+//
+// typedef struct s_keys{
+// 	int id;
+// 	t_header *header;
+// 	struct s_keys *next;
+// }				t_keys;
 
-typedef struct s_keys{
-	int id;
-	t_header *header;
-	struct s_keys *next;
-}				t_keys;
-
-t_keys	*init_key(int id)
+t_keys	*init_key(int id) // this will be used multiple places
 {
 	t_key *key;
 
@@ -22,7 +22,7 @@ t_keys	*init_key(int id)
 	return (key);
 }
 
-t_header	*init_node(char *information)
+t_header	*init_node(char *information) // this will be used multiple places
 {
 	t_header	*node;
 

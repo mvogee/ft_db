@@ -8,10 +8,10 @@ void	print_usage(int reason)
 	if (reason == INVALID_COMMAND)
 	{
 		printf("valid commands:\n");
-		// printf("add_category\n");
-		// printf("add_ellement\n");
-		// printf("delete_ellement\n");
-		// printf("delete_category\n");
+		// printf("add_category\n"); ./bogeedb add_category [col_name][col_name][col_name] ...
+		// printf("add_row\n");
+		// printf("delete_row\n");
+		// printf("delete_category\n"); ./bogeedb delete_category [col_name]
 		printf("new_entry\n");
 		printf("mod_ellement\n");
 		printf("retrieve\n");
