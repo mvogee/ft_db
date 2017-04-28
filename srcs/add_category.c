@@ -1,15 +1,4 @@
-#include "../includes/ftdb.h"
-
-// typedef struct s_header{
-// 	char *information;
-// 	struct s_header *next;
-// }				t_header;
-//
-// typedef struct s_keys{
-// 	int id;
-// 	t_header *header;
-// 	struct s_keys *next;
-// }				t_keys;
+#include "ftdb.h"
 
 t_keys	*init_key(int id) // this will be used multiple places
 {

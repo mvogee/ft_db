@@ -108,10 +108,10 @@ void	dispatch_input(int argc, char **argv, t_keys **database)
 	}
 	else if(!strcmp(argv[1], "modify"))
 		modify_data() // do we have this yet?
-	else if (!strcmp(argv[1], "retrieve"))
-		retrieve() // do we have this yet?
+	else if (!strcmp(argv[1], "query"))
+		get_record(*database, atoi(argv[2]));
 	else
-		print_usage(INVALID_COMMAND); // make this
+		print_usage(INVALID_COMMAND);
 }
 
 int		main(int argc, char **argv)
@@ -120,11 +120,19 @@ int		main(int argc, char **argv)
 	// from file create linked list
 	// modify list based on user input request
 	// write the linekd list contents back to a recreated bogeedb.txt file
-	t_keys *database;
+	t_keys	*database;
+	int		fd;
 
 	if (argc > 1)
 	{
-		database = read_database("bogeedb");
+		fd = open(filename, O_RDWR | O_APPEND);
+		if (fd < 0)
+			database = NULL;
+		else
+		{
+			database = initialize_table(fd);
+			close(fd);
+		}
 		dispatch_input(argc, argv, &database);
 		save_database(database);
 	}

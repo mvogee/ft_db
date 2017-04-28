@@ -7,29 +7,21 @@
 # include <fcntl.h>
 # include <time.h>
 # include <stdlib.h>
+#include "libft.h"
 
-// typedef struct 		s_entry
-// {
-// 	int			key;
-// 	time_t		entry_date;
-// 	char 		fname[32];
-// 	char		lname[32];
-// 	int			score;
-// }					t_entry;
-//
-// typedef struct	s_headers
-// {
-// 	t_headers	*next;
-// 	t_col		*col_head;
-// 	char		*header;
-// 	char		*datatype;
-// }				t_headers
-//
-// typedef struct 	s_col
-// {
-// 	t_col	*down;
-// 	char	*data;
-// }				t_col;
+typedef struct s_header{
+	int		col_num;
+	char	*information;
+	struct s_header *next;
+}				t_header;
+
+typedef struct s_keys{
+	int id;
+	int height;
+	int width;
+	t_header *header;
+	struct s_keys *next;
+}				t_keys;
 
 enum e_errors
 {

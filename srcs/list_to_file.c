@@ -1,4 +1,4 @@
-#include "../includes/ftdb.h"
+#include "ftdb.h"
 
 int 	open_clean_database(char *filename)
 {

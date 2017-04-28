@@ -1,16 +1,4 @@
-#include "../includes/ftdb.h"
-
-// typedef struct s_header{
-// 	char *information;
-// 	struct s_header *next;
-// }				t_header;
-//
-// typedef struct s_keys{
-// 	int id;
-// 	t_header *header;
-// 	struct s_keys *next;
-// }				t_keys;
-
+#include "ftdb.h"
 
 int		find_category(char *category, t_header *header)
 {
