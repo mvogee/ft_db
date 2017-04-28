@@ -11,7 +11,7 @@
 # /* ************************************************************************** */
 
 
-FILENAMES	= main_bhav.c helper_funcs.c link_list_funcs.c query.c
+FILENAMES	= main_bhav.c helper_funcs.c link_list_funcs.c query.c fuckfile.c
 
 ASAN		= -fsanitize=address
 NAME		= db
