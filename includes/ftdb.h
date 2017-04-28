@@ -39,8 +39,6 @@ enum e_errors
 void	print_usage(int reason);
 void		open_new_file(char *filename);
 int		open_file(char *filename);
-t_entry 	init_entry(char *key, char *fname, char *lname, char *score);
-void	new_entry(int argc, char **argv);
 void	create_table(int argc, char **argv);
 void	dispatch_input(int argc, char **argv, t_keys **database);
 

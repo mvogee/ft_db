@@ -53,37 +53,6 @@ int		open_file(char *filename)
 	return (fd);
 }
 
-t_entry 	init_entry(char *key, char *fname, char *lname, char *score)
-{
-		t_entry		new_entry;
-
-//		new_entry.entry_date = NULL;
-		// printf("%s\n", ctime(&new_entry.entry_date));
-		new_entry.key = atoi(key);
-		new_entry.entry_date = time(0);
-		strncpy(new_entry.fname, fname, 32);
-		strncpy(new_entry.lname, lname, 32);
-		new_entry.score = atoi(score);
-		return (new_entry);
-}
-
-void	new_entry(int argc, char **argv)
-{
-	int			table_fd;
-	t_entry		new_entry;
-
-	table_fd = open_file(argv[2]);
-	if (argc != 7 || table_fd < 0)
-		print_usage(NEW_ENTRY);
-	else
-	{
-		new_entry = init_entry(argv[3], argv[4], argv[5], argv[6]);
-		write(table_fd, &new_entry, sizeof(t_entry));
-		close(table_fd);
-		printf("entry complete\n");
-	}
-}
-
 void	create_table(int argc, char **argv)
 {
 	if (argc != 3)
