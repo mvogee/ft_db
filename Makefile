@@ -11,10 +11,10 @@
 # /* ************************************************************************** */
 
 
-FILENAMES	= main_bhav.c
+FILENAMES	= main_bhav.c helper_funcs.c link_list_funcs.c
 
-ASAN		= -fsanitize=address
-NAME		= frac
+//ASAN		= -fsanitize=address
+NAME		= db
 CC			= gcc
 CFLAGS		+= -Wall -Werror -Wextra -Ofast
 INC			+= -Iincludes/

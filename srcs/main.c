@@ -1,7 +1,6 @@
 
 #include "ftdb.h"
 
-
 void	print_usage(int reason)
 {
 	printf("useage: ./bogeedb command\n");
