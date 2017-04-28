@@ -67,36 +67,3 @@ void	save_database(t_keys *database)
 	if (fd >=0)
 		close(fd);
 }
-
-// t_header *init_row(void)
-// {
-// 	t_header *row;
-//
-// 	row = (t_header*)malloc(sizeof(t_header));
-// 	row->next = NULL;
-// 	row->information = strdup("information");
-// 	return (row);
-// }
-//
-// t_keys	*init_list(int k)
-// {
-// 	t_keys *key;
-//
-// 	key = (t_keys*)malloc(sizeof(t_keys));
-// 	key->next = NULL;
-// 	key->id = k;
-// 	key->header = init_row();
-// 	key->header->next = init_row();
-// 	key->header->next->next = init_row();
-// 	return (key);
-// }
-//
-// int main() {
-// 	t_keys *keys;
-//
-// 	keys = init_list(1);
-// 	keys->next = init_list(2);
-// 	keys->next->next = init_list(3);
-// 	save_database(keys);
-// 	return 0;
-// }
