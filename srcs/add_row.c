@@ -63,7 +63,7 @@ void	add_row(t_keys *database, int argc, char **argv)
 		print_usage(ADD_ROW);
 	if (!database || !database->header)
 	{
-		fprintf(stderr, "you have no headers! add some headers frist using add_category\n");
+		fprintf(stderr, "you have no categories! add some headers frist using add_category\n");
 		return ;
 	}
 	tmp = database;

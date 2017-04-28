@@ -63,17 +63,16 @@ void 	delete_element(int pos, t_header **header)
 	return (*header);
 }
 
-void	delete_column(char *category, t_keys *keys)
+void	delete_column(char *category, t_keys **database)
 {
 	// works in thoery ;p
 	// needs to be tested
-
 	int 	list_pos;
 	t_keys	*tmp;
 
 	list_pos = 0;
-	tmp = keys;
-	if (!keys)
+	tmp = *database;
+	if (!tmp)
 	{
 		printf("you need to create categories before you can delete them\n");
 		return ;
