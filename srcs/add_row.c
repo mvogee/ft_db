@@ -52,7 +52,7 @@ t_header	*create_row_list(int argc, char **argv, int num_cols)
 	return (head);
 }
 
-void	add_row(t_keys *database, int argc, char **argv)
+void	add_row(int argc, char **argv, t_keys **database)
 {
 	// needs testing but works in theory
 	int		cols;
@@ -66,9 +66,9 @@ void	add_row(t_keys *database, int argc, char **argv)
 		fprintf(stderr, "you have no categories! add some headers frist using add_category\n");
 		return ;
 	}
-	tmp = database;
+	tmp = *database;
 	new_row = argv[2]; // ./bogeedb add_row [rowname] [col-information]...
-	cols = get_num_cols(database->header);
+	cols = get_num_cols(tmp->header);
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = init_key(tmp->id + 1);

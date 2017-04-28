@@ -8,11 +8,10 @@ void	print_usage(int reason)
 	if (reason == INVALID_COMMAND)
 	{
 		printf("valid commands:\n");
-		// printf("add_category\n"); ./bogeedb add_category [col_name][col_name][col_name] ...
-		// printf("add_row\n");
-		// printf("delete_row\n");
+		// printf("add_category\n"); ./bogeedb add_category [col_name] ...
+		// printf("add_row\n"); ./bogeedb add_row [row_name] (col-information) ...
+		// printf("delete_row\n"); ./bogeedb delete_row [row_name]
 		// printf("delete_category\n"); ./bogeedb delete_category [col_name]
-		printf("new_entry\n");
 		printf("mod_ellement\n");
 		printf("retrieve\n");
 	}
@@ -86,13 +85,16 @@ void	create_table(int argc, char **argv)
 		open_new_file(argv[2]);
 }
 
-void	dispatch_input(int argc, char **argv)
+void	dispatch_input(int argc, char **argv, t_keys **database)
 {
-	if (!strcmp(argv[1], "create_table"))
-		create_table(argc, argv);
-	else if (!strcmp(argv[1], "new_entry"))
-		new_entry(argc, argv);
-	else if (!strcmp())
+	if (!strcmp(argv[1], "add_category"))
+		*database = add_category(argc, argv, *database);
+	else if (!strcmp(argv[1], "delete_category"))
+		new_entry(argc, argv, database);
+	else if (!strcmp(argv[1], "add_row"))
+		add_row(argc, argv, database);
+	else if (!strcmp(argv[1], "delete_row"))
+		delete_row(database, argv[2]);
 	else
 		print_usage(INVALID_COMMAND); // make this
 }
@@ -103,9 +105,16 @@ int		main(int argc, char **argv)
 	// from file create linked list
 	// modify list based on user input request
 	// write the linekd list contents back to a recreated bogeedb.txt file
+	t_keys *database;
+
 	if (argc > 1)
-		dispatch_input(argc, argv);
+	{
+		database = read_database("bogeedb"); // insert bhaviks reading algo here;
+		dispatch_input(argc, argv, &database);
+		save_database(database);
+	}
 	else
 		print_usage(INVALID_COMMAND);
+
 	return (0);
 }
