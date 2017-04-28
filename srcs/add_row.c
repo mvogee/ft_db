@@ -64,7 +64,7 @@ void	add_row(int argc, char **argv, t_keys **database)
 	if (!database || !database->header)
 	{
 		fprintf(stderr, "you have no categories! add some headers frist using add_category\n");
-		return ;
+		print_usage(ADD_ROW);
 	}
 	tmp = *database;
 	new_row = argv[2]; // ./bogeedb add_row [rowname] [col-information]...
