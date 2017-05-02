@@ -63,12 +63,9 @@ int		open_file(char *filename)
 
 void	dispatch_input(int argc, char **argv, t_keys **database)
 {
-	printf("in the dispatch_input_func");
 	if (!strcmp(argv[1], "add_column")) //./bogeedb add_category [col_name] ...
 	{
-		printf("in the add_col_func");
 		*database = add_category(argc, argv, *database);
-		printf("out the add_col_func");
 	}
 	else if (!strcmp(argv[1], "delete_column")) // ./bogeedb delete_category [col_name]
 		delete_column(argv[2], database);
@@ -100,7 +97,6 @@ int		main(int argc, char **argv)
 	if (argc > 1)
 	{
 		fd = open("bogeedb", O_RDWR | O_APPEND);
-		printf("%d\n", fd);
 		if (fd < 0)
 		{
 			database = (t_keys*)(ft_memalloc(sizeof(t_keys)));
@@ -108,12 +104,9 @@ int		main(int argc, char **argv)
 		}
 		else
 		{
-			printf("init database\n");
 			database = initialize_table(fd);
-			printf("%s\n", "initialized table");
 			//close(fd);
 		}
-		printf("%s\n", "enter dispatch");
 		dispatch_input(argc, argv, &database);
 		save_database(database);
 	}

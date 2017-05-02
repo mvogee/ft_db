@@ -13,12 +13,10 @@ t_keys	*initialize_table(int fd)
 	fd = open_db("bogeedb"); //can we just pass the fd in?
 	value_test = get_next_line(fd, &line);
 	width = get_width(line, DELIM);
-	printf("height of file %d, width %d\n", height, width);
 	close(fd); //we can close the file outside
 
 	/* call a function that builds the table */
 	table = read_table(fd, width, DELIM);
-	printf("%s\n", "returned populated table");
 	return(table);
 }
 
@@ -42,7 +40,6 @@ t_keys *read_table(int fd, int width, char delim)
 	fd = open_db("bogeedb");
 	while((x = get_next_line(fd, &line)))
 	{
-		printf("gnl return value %d\n", x);
 		if (x == -1)
 		{
 			perror("get next line error");

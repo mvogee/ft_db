@@ -46,7 +46,10 @@ $(LIBFT):
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(ASAN) $(AFLAGS) $(INC) $(LIBFTLINK) -o $@ $^
 
-clean:
+clean_libft:
+	@make -C libft clean
+
+clean: clean_libft
 	rm -rf build/
 
 fclean: clean

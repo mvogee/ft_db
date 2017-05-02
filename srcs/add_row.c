@@ -25,7 +25,7 @@ t_header	*create_row_list(int argc, char **argv, int num_cols)
 
 	count = 1;
 	i = 4;
-	head = init_node(argv[3]);
+	head = init_node(argv[2]);
 	tmp = head;
 	while (count < num_cols)
 	{

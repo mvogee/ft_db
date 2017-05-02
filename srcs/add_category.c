@@ -71,42 +71,34 @@ t_keys		*add_category(int argc, char **argv, t_keys *database)
 	int 		count;
 
 	count = 2;
-	printf("%s\n","in add category function");
 	if (!database || !database->header)
 	{
-		printf("%s\n","in if null header");
 		database = init_key(0); //might not get triggered due to conditional in main
 		database->header = create_headers(argc, argv);
 		return (database);
 	}
-	printf("seg\n");
 	tmp_keys = database;
-	printf("out\n");
 	tmp_headers = tmp_keys->header;
 	while (tmp_headers->next)
 		tmp_headers = tmp_headers->next;
 	while (count < argc)
 	{
-		printf("%s\n","adding info to the end");
 		tmp_headers->next = init_node(argv[count]);
 		tmp_headers = tmp_headers->next;
 		count++;
 	}
-		printf("keys\n");
-
 	if (tmp_keys->next && (tmp_keys = tmp_keys->next))
 		add_links_to_rows(argc - 2, &tmp_keys); // adds empty nodes to all the rows so that the list stays square
 	//print out the list
-	
-	printf("print out list");
-	while (tmp_keys->next != NULL)
-	{
-		while (tmp_keys->header->next != NULL)
-		{
-			printf("%s\n", tmp_keys->header->information);
-			tmp_keys->header = tmp_keys->header->next;
-		}
-		tmp_keys = tmp_keys->next;
-	}
+	// printf("print out list");
+	// while (tmp_keys->next != NULL)
+	// {
+	// 	while (tmp_keys->header->next != NULL)
+	// 	{
+	// 		printf("%s\n", tmp_keys->header->information);
+	// 		tmp_keys->header = tmp_keys->header->next;
+	// 	}
+	// 	tmp_keys = tmp_keys->next;
+	// }
 	return (database);
 }
