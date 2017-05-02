@@ -16,7 +16,7 @@ void	free_row(t_keys *tmp)
 	free(tmp);
 }
 
-void 	delete_row(t_keys **databse, char *row_head)
+void 	delete_row(t_keys **database, char *row_head)
 {
 	t_keys	*tmp;
 	t_keys	*prev;

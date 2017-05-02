@@ -48,9 +48,9 @@ void	add_row(int argc, char **argv, t_keys **database)
 	char	*new_row;
 	t_keys	*tmp;
 
-	if (ac < 4)
+	if (argc < 4)
 		print_usage(ADD_ROW);
-	if (!database || !database->header)
+	if (!database || !(*database)->header)
 	{
 		fprintf(stderr, "you have no categories! add some headers frist using add_category\n");
 		print_usage(ADD_ROW);

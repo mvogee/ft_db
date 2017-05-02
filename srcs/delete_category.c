@@ -23,7 +23,7 @@ void	free_node(t_header **node)
 	free(*node);
 }
 
-void 	delete_element(int pos, t_header **header)
+t_header *delete_element(int pos, t_header **header)
 {
 	t_header	*tmp;
 	t_header	*prev;
@@ -31,7 +31,7 @@ void 	delete_element(int pos, t_header **header)
 
 	tmp = *header;
 	count = 0;
-	if (pos = 0)
+	if (pos == 0)
 	{
 		tmp = tmp->next;
 		prev = *header;
@@ -47,7 +47,7 @@ void 	delete_element(int pos, t_header **header)
 	if (!tmp)
 		return (*header);
 	prev->next = tmp->next;
-	free_node(tmp);
+	free_node(&tmp);
 	return (*header);
 }
 

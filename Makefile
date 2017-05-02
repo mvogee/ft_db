@@ -11,13 +11,15 @@
 # /* ************************************************************************** */
 
 
-FILENAMES	= main_bhav.c helper_funcs.c link_list_funcs.c query.c fuckfile.c
+FILENAMES	= main.c helper_funcs.c link_list_funcs.c query.c list_to_file.c \
+				file_to_list.c delete_row.c delete_category.c \
+				add_row.c add_category.c
 
 ASAN		= -fsanitize=address
 NAME		= db
 CC			= gcc
 CFLAGS		+= -Wall -Werror -Wextra -Ofast
-INC			+= -Iincludes/
+INC			+= -I./includes
 
 SRCS		= $(addprefix srcs/, $(FILENAMES))
 OBJS		= $(addprefix build/, $(FILENAMES:.c=.o))

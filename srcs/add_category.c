@@ -2,9 +2,9 @@
 
 t_keys	*init_key(int id) // this will be used multiple places
 {
-	t_key *key;
+	t_keys *key;
 
-	key = (t_key*)malloc(sizeof(t_key));
+	key = (t_keys*)malloc(sizeof(t_keys));
 	key->header = NULL;
 	key->next = NULL;
 	key->id = id;
@@ -29,7 +29,7 @@ t_header	*create_headers(int argc, char **argv)
 
 	count = 3;
 	head = init_node(argv[2]);
-	tmp = head
+	tmp = head;
 	while (count < argc)
 	{
 		tmp->next = init_node(argv[count]);
