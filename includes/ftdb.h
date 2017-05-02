@@ -7,7 +7,9 @@
 # include <fcntl.h>
 # include <time.h>
 # include <stdlib.h>
-#include "libft.h"
+# include "libft.h"
+
+# define DELIM ','
 
 typedef struct s_header{
 	int		col_num;
@@ -34,6 +36,8 @@ enum e_errors
 	RETRIEVE
 };
 
+int open_db(char *filename);
+
 t_keys	*init_key(int id);
 t_header	*init_node(char *information);
 t_header	*create_headers(int argc, char **argv);
@@ -51,9 +55,9 @@ void	free_row(t_keys *tmp);
 void 	delete_row(t_keys **databse, char *row_head);
 
 t_keys	*initialize_table(int fd);
-t_keys *read_table(int fd, int width);
+t_keys *read_table(int fd, int width, char delim);
 
-int		get_width(char *line);
+int		get_width(char *line, char delim);
 int		get_height(int fd);
 void close_record(int fd);
 

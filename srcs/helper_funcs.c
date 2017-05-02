@@ -1,6 +1,16 @@
 #include "ftdb.h"
 
-int		get_width(char *line)
+int open_db(char *filename)
+{
+	int fd;
+
+	fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0777);
+	if (fd == -1)
+		perror("open record error");
+	return fd;
+}
+
+int		get_width(char *line, char delim)
 {
 	int width;
 	int pointer;
@@ -9,10 +19,10 @@ int		get_width(char *line)
 	pointer = 1;
 	while (*line)
 	{
-		if (pointer != (*line == ' '))
+		if (pointer != (*line == delim))
 			if (pointer)
 				width++;
-		pointer = (*line == ' ');
+		pointer = (*line == delim);
 		line++;
 	}
 	return width;

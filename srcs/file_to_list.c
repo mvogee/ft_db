@@ -4,17 +4,21 @@ t_keys	*initialize_table(int fd)
 {
 	int height;
 	int width;
+	int value_test;
+
 	char *line;
 	t_keys *table;
 
 	height = get_height(fd);
-	// fd = open_db("bogeedb"); can we just pass the fd in?
-	get_next_line(fd, &line);
-	width = get_width(line);
-	//close(fd); we can close the file outside
+	fd = open_db("bogeedb"); //can we just pass the fd in?
+	value_test = get_next_line(fd, &line);
+	width = get_width(line, DELIM);
+	printf("height of file %d, width %d\n", height, width);
+	close(fd); //we can close the file outside
 
 	/* call a function that builds the table */
-	table = read_table(fd, width);
+	table = read_table(fd, width, DELIM);
+	printf("%s\n", "returned populated table");
 	return(table);
 }
 
@@ -22,7 +26,7 @@ t_keys	*initialize_table(int fd)
 //initialize a single key
 //create a link list base off the width size
 //populate each node with the elements in string_array
-t_keys *read_table(int fd, int width)
+t_keys *read_table(int fd, int width, char delim)
 {
 	int x;
 	char *line;
@@ -33,11 +37,12 @@ t_keys *read_table(int fd, int width)
 
 	x = 1;
 	table = NULL;
-	//header = NULL;
+	header = NULL;
 	height = 0;
-	//fd = open_db("bogeedb"); // we already have the file descriptor open
+	fd = open_db("bogeedb");
 	while((x = get_next_line(fd, &line)))
 	{
+		printf("gnl return value %d\n", x);
 		if (x == -1)
 		{
 			perror("get next line error");
@@ -45,12 +50,12 @@ t_keys *read_table(int fd, int width)
 		}
 		if (x == 0)
 			break;
-		string_array = ft_strsplit(line, ' ');
+		string_array = ft_strsplit(line, delim);
 		header = NULL;
 		populate_headers(&header, string_array, width);
 		Pushtailkey(&table, header);
 		free(string_array);
-		height++;
+		height++; // keep track of the height. Need to store in struct
 	}
 	//print out the list
 	// for (int i = 0; i < height; ++i)
@@ -62,6 +67,8 @@ t_keys *read_table(int fd, int width)
 	// 	}
 	// 	table = table->next;
 	// }
-	//close(fd); we'll close it outside
+	close(fd);
+
 	return (table);
 }
+
