@@ -68,4 +68,3 @@ t_keys *read_table(int fd, int width, char delim)
 
 	return (table);
 }
-

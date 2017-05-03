@@ -52,7 +52,7 @@ void	save_database(t_keys *database)
 	if (fd < 0)
 	{
 		fprintf(stderr, "something went wrong opening the file");
-		rename("bogeedb_backup.txt", "bogeedb.txt"); // opening a new fil failed so fall back to the backup.
+		rename("bogeedb_backup", "bogeedb"); // opening a new fil failed so fall back to the backup.
 		// beyond this point if the program fails the name would have to be restored manually
 	}
 	while (tmp_keys && fd >= 0)

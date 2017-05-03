@@ -46,9 +46,9 @@ void	add_links_to_rows(int new_cols, t_keys **keys)
 	int			count;
 
 	tmp_k = *keys;
-	count = 0;
 	while (tmp_k)
 	{
+		count = 0;
 		tmp_h = tmp_k->header;
 		while (tmp_h->next)
 			tmp_h = tmp_h->next;
