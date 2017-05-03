@@ -84,4 +84,6 @@ void	dispatch_input(int argc, char **argv, t_keys **database);
 int	get_record(t_keys *table, int row_num);
 int	delete_record(t_keys *table, int row_num);
 
+void	modify_data(int argc, char **argv, t_keys **database);
+
 #endif
