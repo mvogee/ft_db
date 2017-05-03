@@ -18,7 +18,7 @@ FILENAMES	= main.c helper_funcs.c link_list_funcs.c query.c list_to_file.c \
 //ASAN		= -fsanitize=address
 NAME		= db
 CC			= gcc
-CFLAGS		+= -Wall -Werror -Wextra -Ofast
+CFLAGS		+= -Wall -Werror -Wextra
 INC			+= -I./includes
 
 SRCS		= $(addprefix srcs/, $(FILENAMES))

@@ -47,7 +47,7 @@ t_keys *read_table(int fd, int width, char delim)
 		}
 		if (x == 0)
 			break;
-		string_array = ft_strsplit(line, delim);
+		string_array = ft_strdelim(line, delim);
 		header = NULL;
 		populate_headers(&header, string_array, width);
 		Pushtailkey(&table, header);
