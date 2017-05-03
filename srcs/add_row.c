@@ -45,7 +45,6 @@ t_header	*create_row_list(int argc, char **argv, int num_cols)
 
 void	add_row(int argc, char **argv, t_keys **database)
 {
-	// needs testing but works in theory
 	int		cols;
 //	char	*new_row;
 	t_keys	*tmp;

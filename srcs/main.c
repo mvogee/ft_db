@@ -85,6 +85,25 @@ void	dispatch_input(int argc, char **argv, t_keys **database)
 		print_usage(INVALID_COMMAND);
 }
 
+void	print_list(t_keys *database)
+{
+	printf("%s\n", "printing lists");
+	t_keys *tmp;
+	t_header *tmp_h;
+
+	tmp = database;
+	while (tmp)
+	{
+		tmp_h = tmp->header;
+		while (tmp_h)
+		{
+			printf("%s, ", tmp_h->information);
+			tmp_h = tmp_h->next;
+		}
+		tmp = tmp->next;
+	}
+}
+
 int		main(int argc, char **argv)
 {
 	//create or open file bogeebd.text
@@ -107,7 +126,9 @@ int		main(int argc, char **argv)
 			database = initialize_table(fd);
 			//close(fd);
 		}
+		print_list(database);
 		dispatch_input(argc, argv, &database);
+		print_list(database);
 		save_database(database);
 	}
 	else

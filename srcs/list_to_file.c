@@ -27,9 +27,9 @@ char	*construct_line(t_header *header)
 	{
 		if (line)
 		{
-			line = (char*)realloc(line, strlen(line) + strlen(tmp_node->information) + 1);
-			line = strcat(line, ",");
-			line = strcat(line, tmp_node->information);
+			line = (char*)realloc(line, strlen(line) + strlen(tmp_node->information) + 2);
+			line = strcat(line, ", ");
+			line = strcat(line, tmp_node->information + 1);
 		}
 		else
 			line = strdup(tmp_node->information);
