@@ -17,6 +17,8 @@ t_keys	*initialize_table(int fd)
 
 	/* call a function that builds the table */
 	table = read_table(fd, width, DELIM);
+	table->width = width;
+	table->height = height;
 	return(table);
 }
 

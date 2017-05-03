@@ -82,7 +82,6 @@ t_header *initialize_columns(int size)
 	temp = head;
 	for (int i = 0; i < size; ++i)
 	{
-		printf("%d\n", temp->col_num);
 		temp = temp->next;
 	}
 	return (head);

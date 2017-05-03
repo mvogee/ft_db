@@ -27,6 +27,8 @@ void	print_usage(int reason)
 		printf("modify [row_id][col_name][new_data]\n");
 	else if (reason == RETRIEVE)
 		printf("retrieve (row_id)(col_name)\n");
+	else if (reason == QUERY)
+		printf("query (row_id)\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -80,7 +82,10 @@ void	dispatch_input(int argc, char **argv, t_keys **database)
 	// else if(!strcmp(argv[1], "modify"))
 	// 	modify_data(); // do we have this yet?
 	else if (!strcmp(argv[1], "query"))
-		get_record(*database, atoi(argv[2]));
+	{
+		get_record(argc, argv, database);
+		//get_record(*database, atoi(argv[2]));
+	}
 	else
 		print_usage(INVALID_COMMAND);
 }
@@ -100,16 +105,18 @@ void	print_list(t_keys *database)
 			printf("%s, ", tmp_h->information);
 			tmp_h = tmp_h->next;
 		}
+		printf("\n");
 		tmp = tmp->next;
 	}
 }
 
+//create or open file bogeebd.text
+// from file create linked list
+// modify list based on user input request
+// write the linekd list contents back to a recreated bogeedb.txt file
+
 int		main(int argc, char **argv)
 {
-	//create or open file bogeebd.text
-	// from file create linked list
-	// modify list based on user input request
-	// write the linekd list contents back to a recreated bogeedb.txt file
 	t_keys	*database;
 	int		fd;
 
@@ -126,9 +133,8 @@ int		main(int argc, char **argv)
 			database = initialize_table(fd);
 			//close(fd);
 		}
-		print_list(database);
 		dispatch_input(argc, argv, &database);
-		print_list(database);
+		//print_list(database); print the list should be a selected function
 		save_database(database);
 	}
 	else

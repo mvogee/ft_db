@@ -33,7 +33,6 @@ t_header	*create_row_list(int argc, char **argv, int num_cols)
 			information = argv[i];
 		else
 			information = "\0";
-		printf("%s\n", information);
 		tmp->next = init_node(information);
 		tmp = tmp->next;
 		count++;
@@ -59,7 +58,6 @@ void	add_row(int argc, char **argv, t_keys **database)
 	tmp = *database;
 //	new_row = argv[2]; // ./bogeedb add_row [rowname] [col-information]...
 	cols = get_num_cols(tmp->header);
-	printf("%d\n", cols);
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = init_key(tmp->id + 1);

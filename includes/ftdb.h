@@ -33,6 +33,7 @@ enum e_errors
 	ADD_ROW,
 	DELETE_ROW,
 	MODIFY,
+	QUERY,
 	RETRIEVE
 };
 
@@ -81,7 +82,8 @@ void	new_entry(int argc, char **argv);
 void	create_table(int argc, char **argv);
 void	dispatch_input(int argc, char **argv, t_keys **database);
 
-int	get_record(t_keys *table, int row_num);
+//int	get_record(t_keys table, int row_num);
+void	get_record(int argc, char **argv, t_keys **database);
 int	delete_record(t_keys *table, int row_num);
 
 #endif

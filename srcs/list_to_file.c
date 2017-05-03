@@ -58,7 +58,7 @@ void	save_database(t_keys *database)
 	while (tmp_keys && fd >= 0)
 	{
 		write_me = construct_line(tmp_keys->header);
-		printf("%s", write_me); // need to do testing to make sure my line looks right
+		//printf("%s", write_me); // need to do testing to make sure my line looks right
 		write(fd, write_me, strlen(write_me));
 		free(write_me);
 		write_me = NULL;
