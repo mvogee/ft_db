@@ -79,8 +79,8 @@ void	dispatch_input(int argc, char **argv, t_keys **database)
 			print_usage(DELETE_ROW);
 		delete_row(database, argv[2]);
 	}
-	// else if(!strcmp(argv[1], "modify"))
-	// 	modify_data(); // do we have this yet?
+	else if(!strcmp(argv[1], "modify"))
+		modify_data(argc, argv, database);
 	else if (!strcmp(argv[1], "query"))
 	{
 		get_record(argc, argv, database);
