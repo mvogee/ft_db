@@ -1,3 +1,4 @@
+
 #include "ftdb.h"
 
 static void	find_row_and_mod(char **argv, int column, t_keys **database)
@@ -31,7 +32,7 @@ static void	find_row_and_mod(char **argv, int column, t_keys **database)
 	}
 }
 
-void	modify_data(int argc, char **argv, t_keys **database)
+void		modify_data(int argc, char **argv, t_keys **database)
 {
 	int		column;
 

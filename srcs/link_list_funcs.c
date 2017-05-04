@@ -1,6 +1,7 @@
+
 #include "ftdb.h"
 
-void Pushheader(t_header **head, char *data)
+void		Pushheader(t_header **head, char *data)
 {
 	t_header *node;
 
@@ -10,7 +11,7 @@ void Pushheader(t_header **head, char *data)
 	*head = node;
 }
 
-void Pushtailheader(t_header **head, char *data)
+void		Pushtailheader(t_header **head, char *data)
 {
 	t_header *current = *head;
 	if (current == NULL)
@@ -27,7 +28,7 @@ void Pushtailheader(t_header **head, char *data)
 	}
 }
 
-void Pushkey(t_keys **head, t_header *col_head)
+void		Pushkey(t_keys **head, t_header *col_head)
 {
 	t_keys *node;
 
@@ -37,7 +38,7 @@ void Pushkey(t_keys **head, t_header *col_head)
 	*head = node;
 }
 
-void Pushtailkey(t_keys **head, t_header *col_head)
+void		Pushtailkey(t_keys **head, t_header *col_head)
 {
 	t_keys *current = *head;
 
@@ -53,7 +54,7 @@ void Pushtailkey(t_keys **head, t_header *col_head)
 	}
 }
 
-void populate_headers(t_header **header, char **array, int width)
+void		populate_headers(t_header **header, char **array, int width)
 {
 	int i;
 
@@ -62,7 +63,7 @@ void populate_headers(t_header **header, char **array, int width)
 		Pushtailheader(header, array[i]);
 }
 
-t_header *initialize_columns(int size)
+t_header	*initialize_columns(int size)
 {
 	t_header *head = NULL;
 	t_header *node = NULL;

@@ -1,6 +1,7 @@
+
 #include "ftdb.h"
 
-int open_db(char *filename)
+int		open_db(char *filename)
 {
 	int fd;
 

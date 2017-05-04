@@ -1,6 +1,6 @@
 #include "ftdb.h"
 
-t_keys	*init_key(int id) // this will be used multiple places
+t_keys		*init_key(int id) // this will be used multiple places
 {
 	t_keys *key;
 
@@ -39,7 +39,7 @@ t_header	*create_headers(int argc, char **argv)
 	return (head);
 }
 
-void	add_links_to_rows(int new_cols, t_keys **keys)
+void		add_links_to_rows(int new_cols, t_keys **keys)
 {
 	t_keys		*tmp_k;
 	t_header	*tmp_h;

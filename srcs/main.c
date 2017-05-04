@@ -1,7 +1,7 @@
 
 #include <ftdb.h>
 
-void	print_usage(int reason)
+void		print_usage(int reason)
 {
 	printf("useage: ./bogeedb [command]\n");
 	if (reason == INVALID_COMMAND)
@@ -48,7 +48,7 @@ void		open_new_file(char *filename)
 	}
 }
 
-int		open_file(char *filename)
+int			open_file(char *filename)
 {
 	int fd;
 
@@ -56,7 +56,7 @@ int		open_file(char *filename)
 	return (fd);
 }
 
-void	dispatch_input(int argc, char **argv, t_keys **database)
+void		dispatch_input(int argc, char **argv, t_keys **database)
 {
 	if (!strcmp(argv[1], "add_column"))
 	{
@@ -83,7 +83,7 @@ void	dispatch_input(int argc, char **argv, t_keys **database)
 		print_usage(INVALID_COMMAND);
 }
 
-void	print_list(t_keys *database)
+void		print_list(t_keys *database)
 {
 	printf("%s\n", "printing lists");
 	t_keys *tmp;
@@ -103,7 +103,7 @@ void	print_list(t_keys *database)
 	}
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_keys	*database;
 	char	*filepath;

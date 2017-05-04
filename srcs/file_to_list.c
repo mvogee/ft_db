@@ -22,7 +22,7 @@ t_keys	*initialize_table(int fd, char *filepath)
 	return(table);
 }
 
-t_keys *read_table(int fd, int width, char delim, char *filepath)
+t_keys	*read_table(int fd, int width, char delim, char *filepath)
 {
 	int x;
 	char *line;

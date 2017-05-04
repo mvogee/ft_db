@@ -1,6 +1,6 @@
 #include "ftdb.h"
 
-int get_num_cols(t_header *header)
+int			get_num_cols(t_header *header)
 {
 	t_header *tmp;
 	int count;
@@ -42,7 +42,7 @@ t_header	*create_row_list(int argc, char **argv, int num_cols)
 	return (head);
 }
 
-void	add_row(int argc, char **argv, t_keys **database)
+void		add_row(int argc, char **argv, t_keys **database)
 {
 	int		cols;
 	t_keys	*tmp;

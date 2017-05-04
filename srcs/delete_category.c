@@ -1,6 +1,7 @@
+
 #include "ftdb.h"
 
-int		find_category(char *category, t_header *header)
+int			find_category(char *category, t_header *header)
 {
 	int pos;
 	t_header *tmp;
@@ -17,13 +18,13 @@ int		find_category(char *category, t_header *header)
 	return (pos);
 }
 
-void	free_node(t_header **node)
+void		free_node(t_header **node)
 {
 	free((*node)->information);
 	free(*node);
 }
 
-t_header *delete_element(int pos, t_header **header)
+t_header	*delete_element(int pos, t_header **header)
 {
 	t_header	*tmp;
 	t_header	*prev;
@@ -51,7 +52,7 @@ t_header *delete_element(int pos, t_header **header)
 	return (*header);
 }
 
-void	delete_column(char *category, t_keys **database)
+void		delete_column(char *category, t_keys **database)
 {
 	int 	list_pos;
 	t_keys	*tmp;

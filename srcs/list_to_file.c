@@ -1,3 +1,4 @@
+
 #include "ftdb.h"
 
 int 	open_clean_database(char *filename, char *backup)
