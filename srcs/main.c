@@ -142,7 +142,7 @@ int		main(int argc, char **argv)
 				fprintf(stderr, "the table \"%s\" was not found.\n", argv[2]);
 				print_usage(INVALID_COMMAND);
 			}
-			database = initialize_table(fd, filepath);
+			database = initialize_table(fd, filepath); // segfault
 			if (!database)
 			{
 				database = (t_keys*)(ft_memalloc(sizeof(t_keys)));

@@ -17,8 +17,11 @@ t_keys	*initialize_table(int fd, char *filepath)
 
 	/* call a function that builds the table */
 	table = read_table(fd, width, DELIM, filepath);
-	table->width = width;
-	table->height = height;
+	if (table)
+	{
+		table->height = height;
+		table->width = width;
+	}
 	return(table);
 }
 
@@ -67,6 +70,5 @@ t_keys *read_table(int fd, int width, char delim, char *filepath)
 	// 	table = table->next;
 	// }
 	close(fd);
-
 	return (table);
 }
