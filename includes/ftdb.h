@@ -34,7 +34,8 @@ enum e_errors
 	DELETE_ROW,
 	MODIFY,
 	QUERY,
-	RETRIEVE
+	RETRIEVE,
+	NEW_TABLE
 };
 
 int open_db(char *filename);

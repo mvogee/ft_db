@@ -7,6 +7,7 @@ void	print_usage(int reason)
 	printf("useage: ./bogeedb [command]\n");
 	if (reason == INVALID_COMMAND)
 	{
+		printf("new_table\n", );
 		printf("valid commands:\n");
 		printf("add_column\n"); //./bogeedb add_category [col_name] ...
 		printf("add_row\n"); //./bogeedb add_row [row_name] (col-information) ...
@@ -16,19 +17,21 @@ void	print_usage(int reason)
 		printf("query\n");
 	}
 	else if (reason == ADD_COLUMN)
-		printf("add_column [col_name] ...\n");
+		printf("add_column [table][col_name] ...\n");
 	else if (reason == ADD_ROW)
-		printf("new_entry [row_name](column data) ...\n");
+		printf("new_entry [table][row_name](column data) ...\n");
 	else if (reason == DELETE_ROW)
-		printf("delete_row [row_name]\n");
+		printf("delete_row [table][row_name]\n");
 	else if (reason == DELETE_COLUMN)
-		printf("delete_column [col_name]\n");
+		printf("delete_column [table][col_name]\n");
 	else if (reason == MODIFY)
-		printf("modify [row_id][col_name][new_data]\n");
+		printf("modify [table][row_id][col_name][new_data]\n");
 	else if (reason == RETRIEVE)
 		printf("retrieve (row_id)(col_name)\n");
 	else if (reason == QUERY)
 		printf("query (row_id)\n");
+	else if (reason == NEW_TABLE)
+		printf("new_table [table_name]\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -119,9 +122,14 @@ int		main(int argc, char **argv)
 {
 	t_keys	*database;
 	int		fd;
+	struct stat st = {0};
 
+	if (stat("~/bogeedb", &st) == -1)
+    	mkdir("~/bogeedb", 0700);
 	if (argc > 1)
 	{
+		if (!strcmp(argv[1], "new_table"))
+			create_new_table(argc, argv); // make this going to have all files open in a bogeedb directory
 		fd = open("bogeedb", O_RDWR | O_APPEND);
 		if (fd < 0)
 		{
