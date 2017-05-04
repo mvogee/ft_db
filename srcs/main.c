@@ -1,25 +1,24 @@
 
 #include <ftdb.h>
 
-
 void	print_usage(int reason)
 {
 	printf("useage: ./bogeedb [command]\n");
 	if (reason == INVALID_COMMAND)
 	{
-		printf("new_table\n", );
 		printf("valid commands:\n");
+		printf("new_table\n"); // ./bogeedb new_table [new_table]
 		printf("add_column\n"); //./bogeedb add_category [col_name] ...
 		printf("add_row\n"); //./bogeedb add_row [row_name] (col-information) ...
 		printf("delete_row\n"); //./bogeedb delete_row [row_name]
 		printf("delete_column\n"); //./bogeedb delete_category [col_name]
-		printf("modify\n");
+		printf("modify\n"); // ./bogeedb modify [table][row][column][new_data]
 		printf("query\n");
 	}
 	else if (reason == ADD_COLUMN)
 		printf("add_column [table][col_name] ...\n");
 	else if (reason == ADD_ROW)
-		printf("new_entry [table][row_name](column data) ...\n");
+		printf("add_row [table][row_name](column data) ...\n");
 	else if (reason == DELETE_ROW)
 		printf("delete_row [table][row_name]\n");
 	else if (reason == DELETE_COLUMN)
@@ -39,7 +38,7 @@ void		open_new_file(char *filename)
 {
 	int			fd;
 
-	fd = open(filename, O_CREAT, 0664);
+	fd = open(filename, O_RDWR | O_APPEND | O_CREAT, 0664);
 	if (fd == -1)
 		fprintf(stderr, "an error occured opening the file %s\n", filename);
 	else
@@ -47,7 +46,6 @@ void		open_new_file(char *filename)
 		printf("new table \"%s\" has been created\n", filename);
 		close(fd);
 	}
-	// add_table(filename); // add the filename to the file with a list of tables (bogeedb_meta)
 }
 
 int		open_file(char *filename)
@@ -73,14 +71,14 @@ void	dispatch_input(int argc, char **argv, t_keys **database)
 		*database = add_category(argc, argv, *database);
 	}
 	else if (!strcmp(argv[1], "delete_column")) // ./bogeedb delete_category [col_name]
-		delete_column(argv[2], database);
+		delete_column(argv[3], database);
 	else if (!strcmp(argv[1], "add_row")) // ./bogeedb add_row [row_name] (col-information) ...
 		add_row(argc, argv, database);
 	else if (!strcmp(argv[1], "delete_row")) // ./bogeedb delete_row [row_name]
 	{
-		if (argc > 3)
+		if (argc > 4)
 			print_usage(DELETE_ROW);
-		delete_row(database, argv[2]);
+		delete_row(database, argv[3]);
 	}
 	else if(!strcmp(argv[1], "modify"))
 		modify_data(argc, argv, database);
@@ -118,32 +116,43 @@ void	print_list(t_keys *database)
 // modify list based on user input request
 // write the linekd list contents back to a recreated bogeedb.txt file
 
+// remember to after doing this inciment all argv calls by 1 to get correct info
 int		main(int argc, char **argv)
 {
 	t_keys	*database;
+	char	*filepath;
 	int		fd;
-	struct stat st = {0};
+	struct stat st;
 
-	if (stat("~/bogeedb", &st) == -1)
-    	mkdir("~/bogeedb", 0700);
-	if (argc > 1)
+	if (stat("bogeedb", &st) == -1)
+	{
+    	mkdir("bogeedb", 0764);
+		printf("created dir\n");
+	}
+	if (argc > 2)
 	{
 		if (!strcmp(argv[1], "new_table"))
-			create_new_table(argc, argv); // make this going to have all files open in a bogeedb directory
-		fd = open("bogeedb", O_RDWR | O_APPEND);
-		if (fd < 0)
-		{
-			database = (t_keys*)(ft_memalloc(sizeof(t_keys)));
-			database->header = NULL;
-		}
+			new_table(argc, argv);
 		else
 		{
-			database = initialize_table(fd);
-			//close(fd);
+			filepath = ft_strjoin("bogeedb/", argv[2]);
+			fd = open(filepath, O_RDWR | O_APPEND); // this will need to be changed to open specified file
+			if (fd < 0)
+			{
+				fprintf(stderr, "the table \"%s\" was not found.\n", argv[2]);
+				print_usage(INVALID_COMMAND);
+			}
+			database = initialize_table(fd, filepath);
+			if (!database)
+			{
+				database = (t_keys*)(ft_memalloc(sizeof(t_keys)));
+				database->header = NULL;
+			}
+			dispatch_input(argc, argv, &database);
+			//print_list(database); print the list should be a selected function
+			save_database(database, filepath);
+			free(filepath);
 		}
-		dispatch_input(argc, argv, &database);
-		//print_list(database); print the list should be a selected function
-		save_database(database);
 	}
 	else
 		print_usage(INVALID_COMMAND);

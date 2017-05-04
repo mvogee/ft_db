@@ -13,7 +13,7 @@
 
 FILENAMES	= main.c helper_funcs.c link_list_funcs.c query.c list_to_file.c \
 				file_to_list.c delete_row.c delete_category.c \
-				add_row.c add_category.c modify_data.c
+				add_row.c add_category.c modify_data.c new_table.c
 
 //ASAN		= -fsanitize=address
 NAME		= db

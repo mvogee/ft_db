@@ -24,8 +24,8 @@ t_header	*create_row_list(int argc, char **argv, int num_cols)
 	t_header	*tmp;
 
 	count = 1;
-	i = 3;
-	head = init_node(argv[2]);
+	i = 4;
+	head = init_node(argv[3]);
 	tmp = head;
 	while (count < num_cols)
 	{
@@ -48,7 +48,7 @@ void	add_row(int argc, char **argv, t_keys **database)
 //	char	*new_row;
 	t_keys	*tmp;
 
-	if (argc < 3)
+	if (argc < 4)
 		print_usage(ADD_ROW);
 	if (!database || !(*database)->header)
 	{
