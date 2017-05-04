@@ -53,8 +53,6 @@ t_header *delete_element(int pos, t_header **header)
 
 void	delete_column(char *category, t_keys **database)
 {
-	// works in thoery ;p
-	// needs to be tested
 	int 	list_pos;
 	t_keys	*tmp;
 

@@ -71,7 +71,7 @@ t_keys		*add_category(int argc, char **argv, t_keys *database)
 	count = 3;
 	if (!database || !database->header)
 	{
-		database = init_key(0); //might not get triggered due to conditional in main
+		database = init_key(0);
 		database->header = create_headers(argc, argv);
 		return (database);
 	}
@@ -86,6 +86,6 @@ t_keys		*add_category(int argc, char **argv, t_keys *database)
 		count++;
 	}
 	if (tmp_keys->next && (tmp_keys = tmp_keys->next))
-		add_links_to_rows(argc - 2, &tmp_keys); // adds empty nodes to all the rows so that the list stays square
+		add_links_to_rows(argc - 2, &tmp_keys);
 	return (database);
 }

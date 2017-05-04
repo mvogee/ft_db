@@ -9,8 +9,8 @@ int 	open_clean_database(char *filename, char *backup)
 		fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0664);
 	else
 	{
-		remove(backup); // will delete the old file "bogeedb.txt" at this point if the program is stopped all the data is lost
-		rename(filename, backup); // this way we alwasy have a backup to fall back on if the program fails beyond this point
+		remove(backup);
+		rename(filename, backup);
 		fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0664);
 	}
 	return (fd);
@@ -54,13 +54,11 @@ void	save_database(t_keys *database, char *filepath)
 	if (fd < 0)
 	{
 		fprintf(stderr, "something went wrong opening the file");
-		rename(backup_name, filepath); // opening a new fil failed so fall back to the backup.
-		// beyond this point if the program fails the name would have to be restored manually
+		rename(backup_name, filepath);
 	}
 	while (tmp_keys && fd >= 0)
 	{
 		write_me = construct_line(tmp_keys->header);
-		//printf("%s", write_me); // need to do testing to make sure my line looks right
 		write(fd, write_me, strlen(write_me));
 		free(write_me);
 		write_me = NULL;

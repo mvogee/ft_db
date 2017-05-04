@@ -63,7 +63,6 @@ t_keys *read_table(int fd, int width, char delim, char *filepath);
 
 int		get_width(char *line, char delim);
 int		get_height(int fd);
-void close_record(int fd);
 
 void Pushheader(t_header **head, char *data);
 void Pushtailheader(t_header **head, char *data);

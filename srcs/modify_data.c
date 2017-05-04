@@ -40,7 +40,7 @@ void	modify_data(int argc, char **argv, t_keys **database)
 		fprintf(stderr, "there is no data to modify! add some data first\n");
 	if (!(*database) || argc != 6)
 		print_usage(MODIFY);
-	column = find_category(argv[4], (*database)->header); // called form delete_category
+	column = find_category(argv[4], (*database)->header);
 	if (column == -1)
 		print_usage(MODIFY);
 	find_row_and_mod(argv, column, database);

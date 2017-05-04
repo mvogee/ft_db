@@ -81,8 +81,6 @@ t_header *initialize_columns(int size)
 	t_header *temp;
 	temp = head;
 	for (int i = 0; i < size; ++i)
-	{
 		temp = temp->next;
-	}
 	return (head);
 }

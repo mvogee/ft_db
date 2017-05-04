@@ -51,8 +51,3 @@ int		get_height(int fd)
 	close(fd);
 	return height;
 }
-
-void close_record(int fd)
-{
-	close(fd);
-}

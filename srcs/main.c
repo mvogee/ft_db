@@ -7,12 +7,12 @@ void	print_usage(int reason)
 	if (reason == INVALID_COMMAND)
 	{
 		printf("valid commands:\n");
-		printf("new_table\n"); // ./bogeedb new_table [new_table]
-		printf("add_column\n"); //./bogeedb add_category [col_name] ...
-		printf("add_row\n"); //./bogeedb add_row [row_name] (col-information) ...
-		printf("delete_row\n"); //./bogeedb delete_row [row_name]
-		printf("delete_column\n"); //./bogeedb delete_category [col_name]
-		printf("modify\n"); // ./bogeedb modify [table][row][column][new_data]
+		printf("new_table\n");
+		printf("add_column\n");
+		printf("add_row\n");
+		printf("delete_row\n");
+		printf("delete_column\n");
+		printf("modify\n");
 		printf("query\n");
 	}
 	else if (reason == ADD_COLUMN)
@@ -56,25 +56,17 @@ int		open_file(char *filename)
 	return (fd);
 }
 
-// void	create_table(int argc, char **argv)
-// {
-// 	if (argc != 3)
-// 		print_usage(CREATE_TABLE_USAGE);
-// 	else
-// 		open_new_file(argv[2]);
-// }
-
 void	dispatch_input(int argc, char **argv, t_keys **database)
 {
-	if (!strcmp(argv[1], "add_column")) //./bogeedb add_category [col_name] ...
+	if (!strcmp(argv[1], "add_column"))
 	{
 		*database = add_category(argc, argv, *database);
 	}
-	else if (!strcmp(argv[1], "delete_column")) // ./bogeedb delete_category [col_name]
+	else if (!strcmp(argv[1], "delete_column"))
 		delete_column(argv[3], database);
-	else if (!strcmp(argv[1], "add_row")) // ./bogeedb add_row [row_name] (col-information) ...
+	else if (!strcmp(argv[1], "add_row"))
 		add_row(argc, argv, database);
-	else if (!strcmp(argv[1], "delete_row")) // ./bogeedb delete_row [row_name]
+	else if (!strcmp(argv[1], "delete_row"))
 	{
 		if (argc > 4)
 			print_usage(DELETE_ROW);
@@ -111,12 +103,6 @@ void	print_list(t_keys *database)
 	}
 }
 
-//create or open file bogeebd.text
-// from file create linked list
-// modify list based on user input request
-// write the linekd list contents back to a recreated bogeedb.txt file
-
-// remember to after doing this inciment all argv calls by 1 to get correct info
 int		main(int argc, char **argv)
 {
 	t_keys	*database;
@@ -136,7 +122,7 @@ int		main(int argc, char **argv)
 		else
 		{
 			filepath = ft_strjoin("bogeedb/", argv[2]);
-			fd = open(filepath, O_RDWR | O_APPEND); // this will need to be changed to open specified file
+			fd = open(filepath, O_RDWR | O_APPEND);
 			if (fd < 0)
 			{
 				fprintf(stderr, "the table \"%s\" was not found.\n", argv[2]);
@@ -150,7 +136,6 @@ int		main(int argc, char **argv)
 			}
 			print_list(database);
 			dispatch_input(argc, argv, &database);
-			//print_list(database); print the list should be a selected function
 			save_database(database, filepath);
 			free(filepath);
 		}

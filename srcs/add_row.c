@@ -45,7 +45,6 @@ t_header	*create_row_list(int argc, char **argv, int num_cols)
 void	add_row(int argc, char **argv, t_keys **database)
 {
 	int		cols;
-//	char	*new_row;
 	t_keys	*tmp;
 
 	if (argc < 4)
@@ -56,7 +55,6 @@ void	add_row(int argc, char **argv, t_keys **database)
 		print_usage(ADD_ROW);
 	}
 	tmp = *database;
-//	new_row = argv[2]; // ./bogeedb add_row [rowname] [col-information]...
 	cols = get_num_cols(tmp->header);
 	while (tmp->next)
 		tmp = tmp->next;

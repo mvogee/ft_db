@@ -5,17 +5,14 @@ t_keys	*initialize_table(int fd, char *filepath)
 	int height;
 	int width;
 	int value_test;
-
 	char *line;
 	t_keys *table;
 
 	height = get_height(fd);
-	fd = open_db(filepath); //can we just pass the fd in?
+	fd = open_db(filepath);
 	value_test = get_next_line(fd, &line);
 	width = get_width(line, DELIM);
-	close(fd); //we can close the file outside
-
-	/* call a function that builds the table */
+	close(fd);
 	table = read_table(fd, width, DELIM, filepath);
 	if (table)
 	{
@@ -25,10 +22,6 @@ t_keys	*initialize_table(int fd, char *filepath)
 	return(table);
 }
 
-
-//initialize a single key
-//create a link list base off the width size
-//populate each node with the elements in string_array
 t_keys *read_table(int fd, int width, char delim, char *filepath)
 {
 	int x;
@@ -57,18 +50,8 @@ t_keys *read_table(int fd, int width, char delim, char *filepath)
 		populate_headers(&header, string_array, width);
 		Pushtailkey(&table, header);
 		free(string_array);
-		height++; // keep track of the height. Need to store in struct
+		height++;
 	}
-	//print out the list
-	// for (int i = 0; i < height; ++i)
-	// {
-	// 	for (int i = 0; i < width; ++i)
-	// 	{
-	// 		printf("%s\n", table->header->information);
-	// 		table->header = table->header->next;
-	// 	}
-	// 	table = table->next;
-	// }
 	close(fd);
 	return (table);
 }
