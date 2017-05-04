@@ -1,6 +1,6 @@
 #include "ftdb.h"
 
-int 	open_clean_database(char *filename)
+int 	open_clean_database(char *filename, char *backup)
 {
 	int fd;
 
@@ -9,8 +9,8 @@ int 	open_clean_database(char *filename)
 		fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0664);
 	else
 	{
-		remove("bogeedb_backup"); // will delete the old file "bogeedb.txt" at this point if the program is stopped all the data is lost
-		rename(filename, "bogeedb_backup"); // this way we alwasy have a backup to fall back on if the program fails beyond this point
+		remove(backup); // will delete the old file "bogeedb.txt" at this point if the program is stopped all the data is lost
+		rename(filename, backup); // this way we alwasy have a backup to fall back on if the program fails beyond this point
 		fd = open(filename, O_CREAT | O_RDWR | O_APPEND, 0664);
 	}
 	return (fd);
@@ -40,19 +40,21 @@ char	*construct_line(t_header *header)
 	return (line);
 }
 
-void	save_database(t_keys *database)
+void	save_database(t_keys *database, char *filepath)
 {
 	t_keys		*tmp_keys;
 	char		*write_me;
 	int			fd;
+	char		*backup_name;
 
 	tmp_keys = database;
 	write_me = NULL;
-	fd = open_clean_database("bogeedb");
+	backup_name = ft_strjoin(filepath, "_backup");
+	fd = open_clean_database(filepath, backup_name);
 	if (fd < 0)
 	{
 		fprintf(stderr, "something went wrong opening the file");
-		rename("bogeedb_backup", "bogeedb"); // opening a new fil failed so fall back to the backup.
+		rename(backup_name, filepath); // opening a new fil failed so fall back to the backup.
 		// beyond this point if the program fails the name would have to be restored manually
 	}
 	while (tmp_keys && fd >= 0)
@@ -64,6 +66,6 @@ void	save_database(t_keys *database)
 		write_me = NULL;
 		tmp_keys = tmp_keys->next;
 	}
-	if (fd >=0)
+	if (fd >= 0)
 		close(fd);
 }

@@ -11,7 +11,7 @@ static void	find_row_and_mod(char **argv, int column, t_keys **database)
 	while (tmp_d)
 	{
 		tmp_h = tmp_d->header;
-		if (!strcmp(tmp_h->information, argv[2]))
+		if (!strcmp(tmp_h->information, argv[3]))
 		{
 			while (i < column)
 			{
@@ -19,14 +19,14 @@ static void	find_row_and_mod(char **argv, int column, t_keys **database)
 				i++;
 			}
 			free(tmp_h->information);
-			tmp_h->information = strdup(argv[4]);
+			tmp_h->information = strdup(argv[5]);
 			break ;
 		}
 		tmp_d = tmp_d->next;
 	}
 	if (!tmp_d)
 	{
-		fprintf(stderr, "no key \"%s\" found\n", argv[2]);
+		fprintf(stderr, "no key \"%s\" found\n", argv[3]);
 		print_usage(MODIFY);
 	}
 }
@@ -38,9 +38,9 @@ void	modify_data(int argc, char **argv, t_keys **database)
 	column = 0;
 	if (!(*database))
 		fprintf(stderr, "there is no data to modify! add some data first\n");
-	if (!(*database) || argc != 5)
+	if (!(*database) || argc != 6)
 		print_usage(MODIFY);
-	column = find_category(argv[3], (*database)->header); // called form delete_category
+	column = find_category(argv[4], (*database)->header); // called form delete_category
 	if (column == -1)
 		print_usage(MODIFY);
 	find_row_and_mod(argv, column, database);

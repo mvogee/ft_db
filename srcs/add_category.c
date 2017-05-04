@@ -27,8 +27,8 @@ t_header	*create_headers(int argc, char **argv)
 	t_header	*head;
 	t_header	*tmp;
 
-	count = 3;
-	head = init_node(argv[2]);
+	count = 4;
+	head = init_node(argv[3]);
 	tmp = head;
 	while (count < argc)
 	{
@@ -64,13 +64,11 @@ void	add_links_to_rows(int new_cols, t_keys **keys)
 
 t_keys		*add_category(int argc, char **argv, t_keys *database)
 {
-	// should work in theory.
-	//aka needs to be tested :p
 	t_keys 		*tmp_keys;
 	t_header	*tmp_headers;
 	int 		count;
 
-	count = 2;
+	count = 3;
 	if (!database || !database->header)
 	{
 		database = init_key(0); //might not get triggered due to conditional in main
@@ -89,16 +87,5 @@ t_keys		*add_category(int argc, char **argv, t_keys *database)
 	}
 	if (tmp_keys->next && (tmp_keys = tmp_keys->next))
 		add_links_to_rows(argc - 2, &tmp_keys); // adds empty nodes to all the rows so that the list stays square
-	//print out the list
-	// printf("print out list");
-	// while (tmp_keys->next != NULL)
-	// {
-	// 	while (tmp_keys->header->next != NULL)
-	// 	{
-	// 		printf("%s\n", tmp_keys->header->information);
-	// 		tmp_keys->header = tmp_keys->header->next;
-	// 	}
-	// 	tmp_keys = tmp_keys->next;
-	// }
 	return (database);
 }

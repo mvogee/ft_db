@@ -5,9 +5,11 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
-# include <time.h>
+//# include <time.h>
 # include <stdlib.h>
 # include "libft.h"
+# include <sys/types.h>
+# include <sys/stat.h>
 
 # define DELIM ','
 
@@ -34,7 +36,8 @@ enum e_errors
 	DELETE_ROW,
 	MODIFY,
 	QUERY,
-	RETRIEVE
+	RETRIEVE,
+	NEW_TABLE
 };
 
 int open_db(char *filename);
@@ -55,8 +58,8 @@ void	delete_column(char *category, t_keys **database);
 void	free_row(t_keys *tmp);
 void 	delete_row(t_keys **databse, char *row_head);
 
-t_keys	*initialize_table(int fd);
-t_keys *read_table(int fd, int width, char delim);
+t_keys	*initialize_table(int fd, char *filepath);
+t_keys *read_table(int fd, int width, char delim, char *filepath);
 
 int		get_width(char *line, char delim);
 int		get_height(int fd);
@@ -69,9 +72,9 @@ void Pushtailkey(t_keys **head, t_header *col_head);
 void populate_headers(t_header **header, char **array, int width);
 t_header *initialize_columns(int size);
 
-int 	open_clean_database(char *filename);
+int 	open_clean_database(char *filename, char *backup);
 char	*construct_line(t_header *header);
-void	save_database(t_keys *database);
+void	save_database(t_keys *database, char *filepath);
 
 void	print_usage(int reason);
 void		open_new_file(char *filename);
@@ -87,5 +90,7 @@ void	get_record(int argc, char **argv, t_keys **database);
 int	delete_record(t_keys *table, int row_num);
 
 void	modify_data(int argc, char **argv, t_keys **database);
+
+void	new_table(int argc, char **argv);
 
 #endif

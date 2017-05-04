@@ -1,6 +1,6 @@
 #include "ftdb.h"
 
-t_keys	*initialize_table(int fd)
+t_keys	*initialize_table(int fd, char *filepath)
 {
 	int height;
 	int width;
@@ -10,15 +10,18 @@ t_keys	*initialize_table(int fd)
 	t_keys *table;
 
 	height = get_height(fd);
-	fd = open_db("bogeedb"); //can we just pass the fd in?
+	fd = open_db(filepath); //can we just pass the fd in?
 	value_test = get_next_line(fd, &line);
 	width = get_width(line, DELIM);
 	close(fd); //we can close the file outside
 
 	/* call a function that builds the table */
-	table = read_table(fd, width, DELIM);
-	table->width = width;
-	table->height = height;
+	table = read_table(fd, width, DELIM, filepath);
+	if (table)
+	{
+		table->height = height;
+		table->width = width;
+	}
 	return(table);
 }
 
@@ -26,7 +29,7 @@ t_keys	*initialize_table(int fd)
 //initialize a single key
 //create a link list base off the width size
 //populate each node with the elements in string_array
-t_keys *read_table(int fd, int width, char delim)
+t_keys *read_table(int fd, int width, char delim, char *filepath)
 {
 	int x;
 	char *line;
@@ -39,7 +42,7 @@ t_keys *read_table(int fd, int width, char delim)
 	table = NULL;
 	header = NULL;
 	height = 0;
-	fd = open_db("bogeedb");
+	fd = open_db(filepath);
 	while((x = get_next_line(fd, &line)))
 	{
 		if (x == -1)
@@ -67,6 +70,5 @@ t_keys *read_table(int fd, int width, char delim)
 	// 	table = table->next;
 	// }
 	close(fd);
-
 	return (table);
 }
