@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 /*
-**							Warning 
+**							Warning
 **			Function does not work correctly with initial delim data
 **			ex char *string = (,,data3,data4,data5)
 **	count the number of words in the string. Allocate space for the num of words
@@ -59,7 +59,7 @@ char		**ft_strdelim(const char *s, char c)
 			s++;
 		iter = ft_strchr(s, c);
 		if (iter)
-			words[word] = (s[1] == c) ? ft_strdup(" ") : ft_strsub(s, 0, iter - s);
+			words[word] = (s[1] == c && s[0] == c) ? ft_strdup(" ") : ft_strsub(s, 0, iter - s);
 		else
 			words[word] = ft_strdup(s);
 		s = iter;
