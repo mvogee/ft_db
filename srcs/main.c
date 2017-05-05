@@ -50,14 +50,6 @@ void		open_new_file(char *filename)
 	}
 }
 
-int			open_file(char *filename)
-{
-	int fd;
-
-	fd = open(filename, O_RDWR | O_APPEND);
-	return (fd);
-}
-
 void		dispatch_input(int argc, char **argv, t_keys **database)
 {
 	if (!strcmp(argv[1], "add_column"))
