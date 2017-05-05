@@ -22,19 +22,19 @@ void 	delete_row(t_keys **database, char *row_head)
 	t_keys	*prev;
 
 	tmp = *database;
-	if (tmp && !strcmp(tmp->header->information, row_head))
+	if (tmp && tmp->header && !strcmp(tmp->header->information, row_head))
 	{
 		*database = tmp->next;
 		free_row(tmp);
 	}
 	else
 	{
-		while (tmp && strcmp(tmp->header->information, row_head))
+		while (tmp && tmp->header && strcmp(tmp->header->information, row_head))
 		{
 			prev = tmp;
 			tmp = tmp->next;
 		}
-		if (!tmp)
+		if (!tmp || !tmp->header)
 			fprintf(stderr, "no row named \"%s\" found\n", row_head);
 		else
 		{
