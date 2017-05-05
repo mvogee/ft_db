@@ -59,7 +59,7 @@ void		delete_column(char *category, t_keys **database)
 
 	list_pos = 0;
 	tmp = *database;
-	if (!tmp)
+	if (!tmp || !tmp->header)
 	{
 		printf("you need to create categories before you can delete them\n");
 		return ;

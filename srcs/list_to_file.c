@@ -57,7 +57,7 @@ void	save_database(t_keys *database, char *filepath)
 		fprintf(stderr, "something went wrong opening the file");
 		rename(backup_name, filepath);
 	}
-	while (tmp_keys && fd >= 0)
+	while (tmp_keys && fd >= 0 && tmp_keys->header)
 	{
 		write_me = construct_line(tmp_keys->header);
 		write(fd, write_me, strlen(write_me));

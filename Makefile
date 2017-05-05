@@ -30,7 +30,7 @@ LIBFTLINK	= -L./libft -lft
 
 .PHONY: all clean fclean re
 
-all: libft $(NAME) clean
+all: libft $(NAME)
 
 build:
 	mkdir $@
@@ -49,10 +49,18 @@ $(NAME): $(OBJS)
 clean_libft:
 	@make -C libft clean
 
+fclean_libft:
+	@make -C libft fclean
+
 clean: clean_libft
 	rm -rf build/
 
-fclean: clean
+fclean: fclean_libft clean
 	rm -f $(NAME)
+
+fclean_db: clean
+	rm -f $(NAME)
+
+re_db: fclean_db all
 
 re: fclean all
