@@ -46,6 +46,7 @@ enum e_errors
 	MODIFY,
 	QUERY,
 	RETRIEVE,
+	PRINT_COL,
 	NEW_TABLE
 };
 
@@ -107,6 +108,7 @@ t_keys		*read_table(int fd, int width, char delim, char *filepath);
 int			open_db(char *filename);
 int			get_width(char *line, char delim);
 int			get_height(int fd);
+int			column_number(t_keys header, char* column_name);
 
 /*
 ** link_list_funcs.c
@@ -145,5 +147,6 @@ void		new_table(int argc, char **argv);
 
 void		get_record(int argc, char **argv, t_keys **database);
 int			delete_record(t_keys *table, int row_num);
+void		print_column(int argc, char **argv, t_keys **database);
 
 #endif

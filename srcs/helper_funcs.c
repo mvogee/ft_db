@@ -75,3 +75,23 @@ t_header	*initialize_columns(int size)
 		temp = temp->next;
 	return (head);
 }
+
+int			column_number(t_keys header, char* column_name)
+{
+	int col_num;
+
+	col_num = 0;
+	while (header.header->next)
+	{	
+		if (ft_strcmp(header.header->information, column_name) == 0)
+		{
+			return col_num;
+			break ;
+		}
+		header.header = header.header->next;
+		col_num++;
+	}
+	if (ft_strcmp(header.header->information, column_name) == 0)
+		return col_num;
+	return (-1);
+}
