@@ -133,6 +133,5 @@ int			main(int argc, char **argv)
 	}
 	else
 		print_usage(INVALID_COMMAND);
-
 	return (0);
 }

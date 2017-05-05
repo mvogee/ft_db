@@ -38,7 +38,6 @@ t_header	*create_row_list(int argc, char **argv, int num_cols)
 		count++;
 		i++;
 	}
-	printf("done\n");
 	return (head);
 }
 
