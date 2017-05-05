@@ -18,7 +18,7 @@ int			get_num_cols(t_header *header)
 t_header	*create_row_list(int argc, char **argv, int num_cols)
 {
 	int			count;
-	int 		i;
+	int			i;
 	char		*information;
 	t_header	*head;
 	t_header	*tmp;
@@ -51,7 +51,7 @@ void		add_row(int argc, char **argv, t_keys **database)
 		print_usage(ADD_ROW);
 	if (!database || !(*database)->header)
 	{
-		fprintf(stderr, "you have no categories! add some headers frist using add_column\n");
+		fprintf(stderr, "You have no categories! Add some headers frist using add_column\n");
 		print_usage(ADD_ROW);
 	}
 	tmp = *database;

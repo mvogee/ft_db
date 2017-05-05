@@ -3,17 +3,17 @@
 
 void		print_usage(int reason)
 {
-	printf("useage: ./bogeedb [command]\n");
+	printf(ANSI_COLOR_RED "useage: ./bogeedb [command] => [command data]" ANSI_COLOR_RESET "\n");
 	if (reason == INVALID_COMMAND)
 	{
 		printf("valid commands:\n");
-		printf("new_table\n");
-		printf("add_column\n");
-		printf("add_row\n");
-		printf("delete_row\n");
-		printf("delete_column\n");
-		printf("modify\n");
-		printf("query\n");
+		printf(ANSI_COLOR_YELLOW"new_table [table]\n");
+		printf("add_column [table][col_name]\n");
+		printf("add_row [table][row_name]...\n");
+		printf("delete_row [table][row_name]\n");
+		printf("delete_column [table][col_name]\n");
+		printf("modify [table][row_id][col_name][data]\n");
+		printf("query\n" ANSI_COLOR_RESET);
 	}
 	else if (reason == ADD_COLUMN)
 		printf("add_column [table][col_name] ...\n");
@@ -75,10 +75,7 @@ void		dispatch_input(int argc, char **argv, t_keys **database)
 	else if(!strcmp(argv[1], "modify"))
 		modify_data(argc, argv, database);
 	else if (!strcmp(argv[1], "query"))
-	{
 		get_record(argc, argv, database);
-		//get_record(*database, atoi(argv[2]));
-	}
 	else
 		print_usage(INVALID_COMMAND);
 }

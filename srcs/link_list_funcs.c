@@ -62,26 +62,3 @@ void		populate_headers(t_header **header, char **array, int width)
 	while(++i < width)
 		Pushtailheader(header, array[i]);
 }
-
-t_header	*initialize_columns(int size)
-{
-	t_header *head = NULL;
-	t_header *node = NULL;
-	int i;
-
-	i = 0;
-	head = (t_header*)ft_memalloc(sizeof(t_header));
-	head->next = NULL;
-	while(i++ < size)
-	{
-		node = (t_header*)ft_memalloc(sizeof(t_header));
-		node->col_num = i;
-		node->next = head;
-		head = node;
-	}
-	t_header *temp;
-	temp = head;
-	for (int i = 0; i < size; ++i)
-		temp = temp->next;
-	return (head);
-}

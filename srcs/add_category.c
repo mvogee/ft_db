@@ -1,6 +1,6 @@
 #include "ftdb.h"
 
-t_keys		*init_key(int id) // this will be used multiple places
+t_keys		*init_key(int id)
 {
 	t_keys *key;
 
@@ -11,7 +11,7 @@ t_keys		*init_key(int id) // this will be used multiple places
 	return (key);
 }
 
-t_header	*init_node(char *information) // this will be used multiple places
+t_header	*init_node(char *information)
 {
 	t_header	*node;
 
@@ -64,9 +64,9 @@ void		add_links_to_rows(int new_cols, t_keys **keys)
 
 t_keys		*add_category(int argc, char **argv, t_keys *database)
 {
-	t_keys 		*tmp_keys;
+	t_keys		*tmp_keys;
 	t_header	*tmp_headers;
-	int 		count;
+	int			count;
 
 	count = 3;
 	if (!database || !database->header)
