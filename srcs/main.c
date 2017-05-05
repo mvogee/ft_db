@@ -7,14 +7,16 @@ void		print_usage(int reason)
 	if (reason == INVALID_COMMAND)
 	{
 		printf("valid commands:\n");
-		printf(ANSI_COLOR_YELLOW"new_table [table]\n");
-		printf("add_column [table][col_name]\n");
-		printf("add_row [table][row_name]...\n");
-		printf("delete_row [table][row_name]\n");
+		printf(ANSI_COLOR_YELLOW"new_table     [table]\n");
+		printf("add_column    [table][col_name]\n");
+		printf("add_row       [table][row_name][row_name]...\n");
+		printf("delete_row    [table][row_name]<---row_name is your first headername\n");
 		printf("delete_column [table][col_name]\n");
-		printf("modify [table][row_id][col_name][data]\n");
-		printf("print_col [table][col_name]\n");
-		printf("query\n" ANSI_COLOR_RESET);
+		printf("modify        [table][row_id][col_name][data]\n");
+		printf("print_col     [table][col_name]\n");
+		printf("print_key     [table][key]\n");
+		printf("print_select  [table][col_name][key]\n");
+		printf("query_row_num [table][row_num]\n" ANSI_COLOR_RESET);
 	}
 	else if (reason == ADD_COLUMN)
 		printf("add_column [table][col_name] ...\n");
@@ -29,13 +31,16 @@ void		print_usage(int reason)
 	else if (reason == RETRIEVE)
 		printf("retrieve (row_id)(col_name)\n");
 	else if (reason == QUERY)
-		printf("query (row_id)\n");
+		printf("query (row_num)\n");
 	else if (reason == PRINT_COL)
-		printf("print_col (row_id)\n");
+		printf("print_col (column_id)\n");
+	else if (reason == PRINT_KEY)
+		printf("print_key (row_id)\n");
+	else if (reason == PRINT_SELECT)
+		printf("print_select (column_id)(key)\n");
 	else if (reason == NEW_TABLE)
 		printf("new_table [table_name]\n");
 	exit(EXIT_FAILURE);
-
 }
 
 void		open_new_file(char *filename)
@@ -82,6 +87,10 @@ void		dispatch_input(int argc, char **argv, t_keys **database)
 		get_record(argc, argv, database);
 	else if (!strcmp(argv[1], "print_col"))
 		print_column(argc, argv, database);
+	else if (!strcmp(argv[1], "print_key"))
+		print_key(argc, argv, database);
+	else if (!strcmp(argv[1], "print_select"))
+		print_select(argc, argv, database);
 	else
 		print_usage(INVALID_COMMAND);
 }
@@ -137,7 +146,6 @@ int			main(int argc, char **argv)
 				database = (t_keys*)(ft_memalloc(sizeof(t_keys)));
 				database->header = NULL;
 			}
-			print_list(database);
 			dispatch_input(argc, argv, &database);
 			save_database(database, filepath);
 			free(filepath);
