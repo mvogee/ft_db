@@ -13,6 +13,7 @@ void		print_usage(int reason)
 		printf("delete_row [table][row_name]\n");
 		printf("delete_column [table][col_name]\n");
 		printf("modify [table][row_id][col_name][data]\n");
+		printf("print_col [table][col_name]\n");
 		printf("query\n" ANSI_COLOR_RESET);
 	}
 	else if (reason == ADD_COLUMN)
@@ -29,9 +30,12 @@ void		print_usage(int reason)
 		printf("retrieve (row_id)(col_name)\n");
 	else if (reason == QUERY)
 		printf("query (row_id)\n");
+	else if (reason == PRINT_COL)
+		printf("print_col (row_id)\n");
 	else if (reason == NEW_TABLE)
 		printf("new_table [table_name]\n");
 	exit(EXIT_FAILURE);
+
 }
 
 void		open_new_file(char *filename)
@@ -76,6 +80,8 @@ void		dispatch_input(int argc, char **argv, t_keys **database)
 		modify_data(argc, argv, database);
 	else if (!strcmp(argv[1], "query"))
 		get_record(argc, argv, database);
+	else if (!strcmp(argv[1], "print_col"))
+		print_column(argc, argv, database);
 	else
 		print_usage(INVALID_COMMAND);
 }
