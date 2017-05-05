@@ -26,8 +26,6 @@ void		print_usage(int reason)
 		printf("delete_column [table][col_name]\n");
 	else if (reason == MODIFY)
 		printf("modify [table][row_id][col_name][new_data]\n");
-	else if (reason == RETRIEVE)
-		printf("retrieve (row_id)(col_name)\n");
 	else if (reason == QUERY)
 		printf("query (row_id)\n");
 	else if (reason == PRINT_COL)
@@ -88,7 +86,6 @@ void		dispatch_input(int argc, char **argv, t_keys **database)
 
 void		print_list(t_keys *database)
 {
-	printf("%s\n", "printing lists");
 	t_keys *tmp;
 	t_header *tmp_h;
 
@@ -137,7 +134,6 @@ int			main(int argc, char **argv)
 				database = (t_keys*)(ft_memalloc(sizeof(t_keys)));
 				database->header = NULL;
 			}
-			print_list(database);
 			dispatch_input(argc, argv, &database);
 			save_database(database, filepath);
 			free(filepath);

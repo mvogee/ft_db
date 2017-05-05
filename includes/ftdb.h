@@ -5,7 +5,6 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
-//# include <time.h>
 # include <stdlib.h>
 # include "libft.h"
 # include <sys/types.h>
@@ -45,7 +44,6 @@ enum e_errors
 	DELETE_ROW,
 	MODIFY,
 	QUERY,
-	RETRIEVE,
 	PRINT_COL,
 	NEW_TABLE
 };
