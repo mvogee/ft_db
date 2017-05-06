@@ -28,16 +28,14 @@ void		print_usage(int reason)
 		printf("delete_column [table][col_name]\n");
 	else if (reason == MODIFY)
 		printf("modify [table][row_id][col_name][new_data]\n");
-	else if (reason == RETRIEVE)
-		printf("retrieve (row_id)(col_name)\n");
 	else if (reason == QUERY)
-		printf("query (row_num)\n");
+		printf("query_row_num [table][row_num]\n");
 	else if (reason == PRINT_COL)
-		printf("print_col (column_id)\n");
+		printf("print_col [column_id]\n");
 	else if (reason == PRINT_KEY)
-		printf("print_key (row_id)\n");
+		printf("print_key [row_id]\n");
 	else if (reason == PRINT_SELECT)
-		printf("print_select (column_id)(key)\n");
+		printf("print_select [column_id][key]\n");
 	else if (reason == NEW_TABLE)
 		printf("new_table [table_name]\n");
 	exit(EXIT_FAILURE);
@@ -83,7 +81,7 @@ void		dispatch_input(int argc, char **argv, t_keys **database)
 	}
 	else if(!strcmp(argv[1], "modify"))
 		modify_data(argc, argv, database);
-	else if (!strcmp(argv[1], "query"))
+	else if (!strcmp(argv[1], "query_row_num"))
 		get_record(argc, argv, database);
 	else if (!strcmp(argv[1], "print_col"))
 		print_column(argc, argv, database);
@@ -97,7 +95,6 @@ void		dispatch_input(int argc, char **argv, t_keys **database)
 
 void		print_list(t_keys *database)
 {
-	printf("%s\n", "printing lists");
 	t_keys *tmp;
 	t_header *tmp_h;
 

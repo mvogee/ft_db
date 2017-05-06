@@ -153,20 +153,3 @@ void	print_select(int argc, char **argv, t_keys **database)
 		tmp.header = tmp.header->next;
 	printf("%s\n", tmp.header->information);
 }
-
-int	delete_record(t_keys *table, int row_num)
-{
-	int i;
-	t_keys *head = table;
-
-	i = 0;
-	while (i++ < row_num)
-		head = head->next;
-	while(head->header->next != NULL)
-	{
-		head->header = NULL;
-		head->header = head->header->next;
-	}
-	printf("\n");
-	return (1);
-}

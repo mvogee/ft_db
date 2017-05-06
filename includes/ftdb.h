@@ -5,7 +5,6 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
-//# include <time.h>
 # include <stdlib.h>
 # include "libft.h"
 # include <sys/types.h>
@@ -45,7 +44,6 @@ enum e_errors
 	DELETE_ROW,
 	MODIFY,
 	QUERY,
-	RETRIEVE,
 	PRINT_COL,
 	PRINT_KEY,
 	PRINT_SELECT,
@@ -148,7 +146,6 @@ void		new_table(int argc, char **argv);
 */
 
 void		get_record(int argc, char **argv, t_keys **database);
-int			delete_record(t_keys *table, int row_num);
 void		print_column(int argc, char **argv, t_keys **database);
 void		print_key(int argc, char **argv, t_keys **database);
 void		print_select(int argc, char **argv, t_keys **database);
