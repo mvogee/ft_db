@@ -47,6 +47,8 @@ enum e_errors
 	QUERY,
 	RETRIEVE,
 	PRINT_COL,
+	PRINT_KEY,
+	PRINT_SELECT,
 	NEW_TABLE
 };
 
@@ -148,5 +150,7 @@ void		new_table(int argc, char **argv);
 void		get_record(int argc, char **argv, t_keys **database);
 int			delete_record(t_keys *table, int row_num);
 void		print_column(int argc, char **argv, t_keys **database);
+void		print_key(int argc, char **argv, t_keys **database);
+void		print_select(int argc, char **argv, t_keys **database);
 
 #endif
