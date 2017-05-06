@@ -1,2 +1,0 @@
-7. create a query with two specifiers (Header) && (Id)
-3. specify what a "row name is"
